@@ -1,5 +1,9 @@
 ﻿public interface IPassenger
 {
+    bool IsWaiting { get; }
+    bool IsMoving { get; }
+    bool IsArrived { get; }
+
     void WaitingAtStation(IStation station);
 
     void AboardBus(IBus bus); 

@@ -9,7 +9,10 @@ public class Passenger : IPassenger {
         Moving,
         Arrived,
     }
-    private PassengerStatus _status;
+    private PassengerStatus _status; 
+    public bool IsWaiting { get { return _status == PassengerStatus.Waiting; } }
+    public bool IsMoving { get { return _status == PassengerStatus.Moving; } }
+    public bool IsArrived { get { return _status == PassengerStatus.Arrived; } }
 
     private readonly int _rageMax;
     private int _rage;
@@ -24,6 +27,8 @@ public class Passenger : IPassenger {
         _start = start;
         _goal = goal;
         _rage = 0; 
+
+        WaitingAtStation(start);
     }
 
     public void AboardBus(IBus bus) {

@@ -16,6 +16,12 @@ public class Station : IStation
     [SerializeField]
     private int[] neighbors;
 
+    private List<IPassenger> passengers;
+
+    public Station() {
+        passengers = new List<IPassenger>();
+    }
+
     public bool IsMainStation()
     {
         return mainStation;
@@ -32,12 +38,18 @@ public class Station : IStation
 
     public void NewPassenger(IPassenger passenger)
     {
-
+        passengers.Add(passenger);
     }
 
     public List<IPassenger> GetPassengers(int seats)
     {
-        return null;
+        int num = passengers.Count > seats ? seats : passengers.Count;
+        List<IPassenger> aboards = new List<IPassenger>();
+        for (int i = 0; i < num; i++) {
+            aboards.Add(passengers[i]);
+        }
+        passengers.RemoveRange(0, num);
+        return aboards;
     }
     
 }

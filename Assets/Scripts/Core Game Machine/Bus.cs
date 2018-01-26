@@ -20,6 +20,16 @@ public class Bus : IBus {
         _passengers = new List<IPassenger>();
     }
 
+    public void StartBusPath(List<IStation> path) {
+        if (path.Count <= 0) {
+            throw new Exception("wrong station path");
+        }
+
+        _path = path;
+        _start = path[0];
+        _goal = path[path.Count - 1];
+    }
+
     public void PassThroughStation(IStation station) {
         if (station != _goal) {
             _busPassengersCheckStation(station);
@@ -35,20 +45,24 @@ public class Bus : IBus {
     }
 
     private void _busPassengersCheckStation(IStation station) {
-        foreach (IPassenger passenger in _passengers) {
-            passenger.PassThroughNextStation(station, this);
-        }
+        Debug.Log(_passengers + "" + _passengers.Count);
+        for (int i = 0; i < _passengers.Count; i++) {
+            _passengers[i].PassThroughNextStation(station, this);
+        } 
     }
 
     private void _stationPassengersAboardBus(IStation station) {
         var waitingPassengers = station.GetPassengers(_capacity - _passengers.Count);
-        _passengers.AddRange(waitingPassengers);
+        foreach (IPassenger passneger in waitingPassengers) {
+            passneger.AboardBus(this);
+            _passengers.Add(passneger);
+        }
     }
 
     private void _busPassengersAllGetOff(IStation station) {
-        foreach(IPassenger passenger in _passengers){
-            _passengers.Remove(passenger);
-            passenger.GetOffFromBusAndArriveStation(station);
+        for (int i = 0; i < _passengers.Count; i++) {
+            _passengers[i].GetOffFromBusAndArriveStation(station);
         }
+        _passengers.Clear();
     }
 }
