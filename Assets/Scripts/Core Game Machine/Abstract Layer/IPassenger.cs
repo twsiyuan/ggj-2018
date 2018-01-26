@@ -1,8 +1,12 @@
 ﻿public interface IPassenger
 {
-    void AboardBus(IBus bus);
+    void WaitingAtStation(IStation station);
 
-    void GetOffBus(IStation station);
+    void AboardBus(IBus bus); 
+
+    void PassThroughNextStation(IStation station, IBus bus);
+
+    void GetOffFromBusAndArriveStation(IStation station);
 
     void UpdateRage();
 }

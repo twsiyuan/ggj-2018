@@ -1,4 +1,6 @@
 ﻿public interface IBus
 {
-    void ArriveStation(IStation station);
+    void PassThroughStation(IStation station);
+
+    void PassengerGetOff(IPassenger passenger);
 }
