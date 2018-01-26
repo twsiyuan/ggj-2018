@@ -461,6 +461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2104331702}
   - component: {fileID: 2104331703}
+  - component: {fileID: 2104331704}
   m_Layer: 0
   m_Name: Prototype
   m_TagString: Untagged
@@ -492,3 +493,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd2cb3559ec84b5aa137718f51d0de6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2104331704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2104331701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ae96493440f74725b0c74231a9a6de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beginStations: []
+  hidingStations: []
