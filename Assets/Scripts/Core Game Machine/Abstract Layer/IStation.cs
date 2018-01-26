@@ -17,7 +17,6 @@ public interface IStation
     /// </summary>
 	bool IsNeighbor(int index);
 
-
     /// <summary>
     /// 由系統生成乘客
     /// </summary>
