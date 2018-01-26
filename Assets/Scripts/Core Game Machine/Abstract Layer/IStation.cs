@@ -10,7 +10,7 @@ public interface IStation
     /// <summary>
     /// 判斷是否為主車站
     /// </summary>
-    bool IsMainStation();
+    bool IsMainStation(); 
 
     /// <summary>
     /// 依據帶入的索引判斷車站是否彼此臨近
