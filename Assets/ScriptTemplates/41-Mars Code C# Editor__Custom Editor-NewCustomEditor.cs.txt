@@ -1,0 +1,26 @@
+﻿using UnityEngine;
+using UnityEditor;
+
+[CustomEditor(typeof(#TARGETSCRIPTNAME#)), CanEditMultipleObjects]
+public class #SCRIPTNAME# : Editor
+{
+
+	private #TARGETSCRIPTNAME# script;
+
+
+	private void OnEnable()
+	{
+		script = target as #TARGETSCRIPTNAME#;
+	}
+
+
+	public override void OnInspectorGUI()
+	{    	
+		DrawDefaultInspector();
+
+		serializedObject.Update();
+
+		serializedObject.ApplyModifiedProperties();
+	}
+
+}

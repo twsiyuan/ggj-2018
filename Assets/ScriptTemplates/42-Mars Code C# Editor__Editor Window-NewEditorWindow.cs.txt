@@ -1,0 +1,24 @@
+﻿using UnityEngine;
+using UnityEditor;
+
+public class #SCRIPTNAME# : EditorWindow
+{
+
+	public static void Launch()
+	{
+		var window = GetWindow(typeof(#SCRIPTNAME#)) as #SCRIPTNAME#;
+		window.Show();
+	}
+
+	private void OnEnable()
+	{
+		#NOTRIM#
+	}
+
+
+	private void OnGUI()
+	{
+		#NOTRIM#
+	}
+
+}

@@ -1,0 +1,51 @@
+
+
+# ====================================== #
+# Unity 				 #
+# ====================================== #
+Temp/
+Library/
+Debug/
+Assets/Test/
+Assets/Test.meta
+
+
+# ====================================== #
+# Unity Plugins				 #
+# ====================================== #
+Assets/codeandweb.com/
+Assets/codeandweb.com.meta
+
+
+# ====================================== #
+# Visual Studio/ VS Code/ MonoDevelop  #
+# ====================================== #
+ExportedObj/
+.vs/
+.vscode/
+obj/
+bin/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+*.code-workspace
+
+
+# ====================================== #
+# OS					 #
+# ====================================== #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
