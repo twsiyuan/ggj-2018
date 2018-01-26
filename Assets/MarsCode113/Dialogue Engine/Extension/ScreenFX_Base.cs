@@ -1,5 +1,4 @@
-﻿using Sirenix.OdinInspector;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MarsCode113.DialogueFramework
 {
@@ -25,11 +24,9 @@ namespace MarsCode113.DialogueFramework
         }
 
 
-        [VerticalGroup("Button")]
         public virtual void Play() { }
 
 
-        [VerticalGroup("Button")]
         public virtual void Stop() { }
 
     }
