@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class StationAssigner : MonoBehaviour
+public class StationContainer : MonoBehaviour
 {	
 
     [SerializeField]
