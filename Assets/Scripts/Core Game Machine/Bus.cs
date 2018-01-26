@@ -41,16 +41,8 @@ public class Bus : IBus {
     }
 
     private void _stationPassengersAboardBus(IStation station) {
-        List<IPassenger> waitingPassengers = station.GetPassengers();
-        while (_canAboard(waitingPassengers)) {
-            IPassenger nextPassenger = waitingPassengers[0];
-            _passengers.Add(nextPassenger);
-            waitingPassengers.Remove(nextPassenger);
-        }
-    }
-
-    private bool _canAboard(List<IPassenger> waitingPassengers) {
-        return _passengers.Count < _capacity && waitingPassengers.Count > 0;
+        var waitingPassengers = station.GetPassengers(_capacity - _passengers.Count);
+        _passengers.AddRange(waitingPassengers);
     }
 
     private void _busPassengersAllGetOff(IStation station) {

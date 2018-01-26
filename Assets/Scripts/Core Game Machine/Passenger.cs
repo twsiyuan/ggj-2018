@@ -56,7 +56,7 @@ public class Passenger : IPassenger {
     }
 
     public void WaitingAtStation(IStation station) {
-        station.AddWaitingPassenger(this);
+        station.NewPassenger(this);
         _status = PassengerStatus.Waiting;
     }
 
