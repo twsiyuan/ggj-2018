@@ -14,6 +14,8 @@ public class PassengerGenerator : IPassengerGenerator
     private IPassengerManager _passengerMgr;
     private PassengerViewFactory _passengerViewFactory;
 
+    public event Action<IPassenger> GeneratePassengerEvent;
+
     public PassengerGenerator(
         GameController gameCtrl, IMap map, IPassengerManager passengerMgr, PassengerViewFactory passengerViewFactory) {
         _gameCtrl = gameCtrl;
@@ -24,6 +26,8 @@ public class PassengerGenerator : IPassengerGenerator
         _rand = new System.Random();
         _waitInterval = 5;
         _resetTimer();
+
+        GeneratePassengerEvent = null; 
     } 
 
     public void UpdateTimer() {
@@ -47,7 +51,13 @@ public class PassengerGenerator : IPassengerGenerator
         int lableIdx = _gameCtrl.GetStationIndex(goal);
         IPassengerView passengerView = _passengerViewFactory.MakePassengerView(lableIdx);
 
-        _passengerMgr.AddPassenger( new Passenger(start, goal, passengerView, _gameCtrl) );
+        IPassenger newPassenger = new Passenger(start, goal, passengerView, _gameCtrl);
+        if (GeneratePassengerEvent != null) { 
+            GeneratePassengerEvent.Invoke(newPassenger);
+        }
+         
+        _passengerMgr.AddPassenger(newPassenger);
+        newPassenger.WaitingAtStation(start);
     }
 
     private void _resetTimer() {
