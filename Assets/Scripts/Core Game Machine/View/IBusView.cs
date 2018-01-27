@@ -3,8 +3,8 @@ using UnityEngine;
 
 public interface IBusView
 {
-    IEnumerator InitAnimate(Transform stationTransform);
-    IEnumerator MoveToStationAnimate(Transform stationTransform);
+	IEnumerator InitAnimate(Vector3 position);
+	IEnumerator MoveToStationAnimate(IRoad road);
     void WaitAboardAnimate();
 
 }

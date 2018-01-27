@@ -26,13 +26,11 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
 
         _busView = _busViewFactory.MakeBusView();
 
-        yield return _busView.InitAnimate(stations[0].Transform); 
+		yield return _busView.InitAnimate(stations[0].Transform.position); 
 
         for (int i = 1; i < stations.Count; i++) {
-            IStation current = stations[i];
-            Transform stationTransform = current.Transform;
-            Debug.Log("go to " + stationTransform.position);
-            yield return _busView.MoveToStationAnimate(stationTransform);
+			var road = stations [i - 1].GetRoad (stations[i]);
+			yield return _busView.MoveToStationAnimate(road);
         }
 
         yield return null;

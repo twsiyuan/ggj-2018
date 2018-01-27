@@ -10,7 +10,7 @@ public class MapGenerator : MonoBehaviour
 	[SerializeField]
 	Map generateTarget = null;
 
-	void Awake()
+	void Start()
 	{
 		if (this.generateOnAwake) {
 			this.Generate (this.generateTarget);
