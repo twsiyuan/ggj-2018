@@ -17,5 +17,10 @@ public class GameController : MonoBehaviour
         _gameLoop.Initial(_sensorListener, _animateMgr);
 
         StartCoroutine(_gameLoop.MainLoop());
+         
+    }
+
+    void Update() {
+        // _gameLoop.Update();
     }
 }
