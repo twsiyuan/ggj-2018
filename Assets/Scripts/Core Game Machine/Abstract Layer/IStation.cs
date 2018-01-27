@@ -56,5 +56,7 @@ public interface IStation
     /// </summary>
 	void PickupPassengers(int seats, List<IPassenger> output);
 
+    void ExitStation(IPassenger passenger);
+
     void RearrangePassengersView();
 }

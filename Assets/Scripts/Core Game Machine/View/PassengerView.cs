@@ -71,9 +71,11 @@ public class PassengerView : IPassengerView
         });
     }
 
-    public void FailedAnimate() {
+    public void FailedAnimate(IStation station) {
+        _facePrefab.GetComponent<SpriteRenderer>().DOFade(0.0f, _failFadeDuration).Play();
         _passengerPrefab.GetComponent<SpriteRenderer>().DOFade(0.0f, _failFadeDuration).Play().OnComplete(() => {
             MonoBehaviour.Destroy(_passengerPrefab);
+            station.RearrangePassengersView();
         });
     }
 }

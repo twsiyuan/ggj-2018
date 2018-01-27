@@ -27,7 +27,8 @@ public partial class GameController
 
 	public void AddRage(int value)
 	{
-		scoreBoard.AddRage(value);
+        // TODO
+	    //	scoreBoard.AddRage(value);
 	}
 
 	public void AdjustRageMax(int value)
