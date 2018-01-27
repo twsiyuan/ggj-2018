@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TableSlotDragSensor : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
+public class TableGameDragSensor : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
     [SerializeField]
@@ -14,11 +14,11 @@ public class TableSlotDragSensor : MonoBehaviour, IPointerDownHandler, IDragHand
     private IDragSensorManager manager;
 
 
-    public static TableSlotDragSensor Init(MaskableGraphic target, IDragSensorManager manager, int id)
+    public static TableGameDragSensor Init(MaskableGraphic target, IDragSensorManager manager, int id)
     {
-        var sensor = target.GetComponent<TableSlotDragSensor>();
+        var sensor = target.GetComponent<TableGameDragSensor>();
         if(sensor == null)
-            sensor = target.gameObject.AddComponent<TableSlotDragSensor>();
+            sensor = target.gameObject.AddComponent<TableGameDragSensor>();
 
         sensor.manager = manager;
         sensor.id = id;
@@ -29,31 +29,31 @@ public class TableSlotDragSensor : MonoBehaviour, IPointerDownHandler, IDragHand
 
     public void OnPointerDown(PointerEventData data)
     {
-        manager.RegisterSensor(id);
+        manager.StartDragging(id);
     }
 
 
     public void OnPointerUp(PointerEventData data)
     {
-        manager.RemoveSensor(id);
+        manager.CompleteDragging(id);
     }
 
 
     public void OnPointerEnter(PointerEventData data)
     {
-        manager.OverlapSensor(id);
+        manager.CheckInSensor(id);
     }
 
 
     public void OnPointerExit(PointerEventData data)
     {
-        manager.SplitSensor(id);
+        manager.CheckOutSensor(id);
     }
 
 
     public void OnDrag(PointerEventData data)
     {
-        manager.DragSensor(data.position - data.pressPosition);
+        manager.SyncPointerLocation(data.position - data.pressPosition);
     }
 
 }

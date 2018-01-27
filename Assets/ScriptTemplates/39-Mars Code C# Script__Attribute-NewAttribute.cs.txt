@@ -1,17 +1,11 @@
 ﻿using System;
 
-public class #SCRIPTNAME#Attribute : Attribute
+public class #SCRIPTNAME# : Attribute
 {	
 
-	public #SCRIPTNAME#Attribute()
+	public #SCRIPTNAME#()
     {
 
-    }
-
-
-    public override string ToString()
-    {
-        return this.ToString();
     }
 
 }

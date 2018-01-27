@@ -3,4 +3,9 @@
 public class #SCRIPTNAME# : MonoBehaviour
 {	
 	
+	private void Start()
+	{
+		#NOTRIM#
+	}
+
 }

@@ -3,18 +3,18 @@
 public interface IDragSensorManager
 {
 
-    void RegisterSensor(int id);
+    void StartDragging(int sensorID);
 
 
-    void DragSensor(Vector2 pos);
+    void CheckInSensor(int sensorID);
 
 
-    void OverlapSensor(int id);
+    void CheckOutSensor(int sensorID);
 
 
-    void SplitSensor(int id);
+    void CompleteDragging(int sensorID);
 
 
-    void RemoveSensor(int id);
+    void SyncPointerLocation(Vector2 pos);
 
 }

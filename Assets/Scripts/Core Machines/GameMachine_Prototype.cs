@@ -66,12 +66,12 @@ public class GameMachine_Prototype : MonoBehaviour, IDragSensorManager
     {
         var id = 0;
         foreach(var s in sensors)
-            TableSlotDragSensor.Init(s, this, id++);
+            TableGameDragSensor.Init(s, this, id++);
 
         sensors = null;
     }
 
-    public void RegisterSensor(int sensorID)
+    public void StartDragging(int sensorID)
     {
         var station = map.GetStation(sensorID);
         if(!station.IsMainStation)
@@ -85,7 +85,7 @@ public class GameMachine_Prototype : MonoBehaviour, IDragSensorManager
         RegisterSensorHook();
     }
 
-    public void OverlapSensor(int sensorID)
+    public void CheckInSensor(int sensorID)
     {
         if(start == -1)
             return;
@@ -117,7 +117,7 @@ public class GameMachine_Prototype : MonoBehaviour, IDragSensorManager
         return station.IsNeighbor(start);
     }
 
-    public void SplitSensor(int sensorID)
+    public void CheckOutSensor(int sensorID)
     {
         if(end == -1)
             return;
@@ -127,7 +127,7 @@ public class GameMachine_Prototype : MonoBehaviour, IDragSensorManager
         end = -1;
     }
 
-    public void RemoveSensor(int sensorID)
+    public void CompleteDragging(int sensorID)
     {
         RemoveSensorHook();
 
@@ -136,7 +136,7 @@ public class GameMachine_Prototype : MonoBehaviour, IDragSensorManager
         end = -1;
     }
 
-    public virtual void DragSensor(Vector2 pos) { }
+    public virtual void SyncPointerLocation(Vector2 pos) { }
 
     protected virtual void RegisterSensorHook()
     { 
