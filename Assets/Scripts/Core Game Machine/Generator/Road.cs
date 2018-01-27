@@ -39,8 +39,6 @@ public class Road : IRoad {
 		for (var i = 1; i < this.distance.Length; i++) {
 			if (t < this.distance [i]) {
 				var f = Mathf.InverseLerp (this.distance[i - 1], this.distance[i], t);
-				Debug.Log ("t = " + t + ", f = " + f);
-				Debug.DrawLine (this.points[i-1], this.points[i], Color.red, 1000000);
 				return Vector3.Lerp (this.points[i-1], this.points[i], f);
 			}
 		}
