@@ -5,11 +5,11 @@ using UnityEngine;
 public class PassengerViewFactory : MonoBehaviour
 {
     [SerializeField]
-    GameObject _passenger1;
+	PassengerSettings settings = null;
 
-    public IPassengerView MakePassengerView() {
-         
-        GameObject prefab = UnityEngine.Object.Instantiate(_passenger1);
-        return new PassengerView(prefab);
+    public IPassengerView MakePassengerView() 
+	{
+		GameObject prefab = UnityEngine.Object.Instantiate(this.settings.GetPrefabRandom());
+		return new PassengerView(prefab);
     }
 }

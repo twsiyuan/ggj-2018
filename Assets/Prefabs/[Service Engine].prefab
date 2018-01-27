@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 114611333141379478}
   - component: {fileID: 114140585305300040}
   m_Layer: 0
-  m_Name: '[Service]'
+  m_Name: '[Service Engine]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
