@@ -26,11 +26,13 @@ public class BusView : IBusView
         float duration = road.GetTotalDistance() * 0.3f;
 		var startTime = Time.time;
 		var endTime = startTime + duration;
-		while (Time.time < endTime){
+
+        while (Time.time < endTime){
 			var t = Mathf.InverseLerp (startTime, endTime, Time.time);
 			_busPrefab.transform.position = road.GetPosition (t);
 			yield return null;
 		}
+
 		_busPrefab.transform.position = road.GetPosition (1); 
     }
 

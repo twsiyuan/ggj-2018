@@ -53,13 +53,12 @@ public class Bus : IBus {
 
     private List<IPassenger> _busPassengersCheckStation(IStation station) {
         List<IPassenger> arriveds = new List<IPassenger>();
-        for (int i = 0; i < _passengers.Count; i++) {
-            IPassenger current = _passengers[i];
-            bool isArrived = current.PassThroughNextStation(station, this); 
+        _passengers.ForEach( (passenger) => {
+            bool isArrived = passenger.PassThroughNextStation(station, this); 
             if (isArrived) {
-                arriveds.Add(current);
+                arriveds.Add(passenger);
             }
-        }
+        }); 
         return arriveds;
     }
 

@@ -20,8 +20,7 @@ public class PassengerView : IPassengerView
         _passengerPrefab = passenger;
         _passengerPrefab.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
 
-        _facePrefab = _passengerPrefab.transform.GetChild(0).gameObject;
-        _facePrefab.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        _facePrefab = _passengerPrefab.transform.GetChild(0).gameObject; 
 
         _labelPrefab = _passengerPrefab.transform.GetChild(1).gameObject;
         _labelPrefab.GetComponent<SpriteRenderer>().sprite = label;
