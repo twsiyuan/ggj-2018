@@ -73,7 +73,7 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
     #endregion
 
-    #region [ Basic ]
+    #region [ Mono Behaviour ]
 
     private void Awake()
     {
