@@ -2,11 +2,14 @@
 using UnityEngine;
 
 [Serializable]
-public class BusViewFactory : IBusViewFactory
-{
+public class BusViewFactory : MonoBehaviour {
+
+    [SerializeField]
+    GameObject _Bus;
+
     public IBusView MakeBusView() {
 
-        GameObject prefab = UnityEngine.Object.Instantiate(Resources.Load("Prefabs/Bus") as GameObject);
+        GameObject prefab = UnityEngine.Object.Instantiate(_Bus);
         return new BusView(prefab);
     }
 }

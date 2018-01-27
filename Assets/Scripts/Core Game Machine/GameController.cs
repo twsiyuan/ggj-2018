@@ -12,6 +12,9 @@ public partial class GameController : MonoBehaviour
 	[SerializeField]
 	private Map map;
 
+    [SerializeField]
+    private PassengerViewFactory passengerViewFactory;
+
     private IPassengerManager _passengerMgr;
     private IPassengerGenerator _passengerGenerator;
 
@@ -39,7 +42,7 @@ public partial class GameController : MonoBehaviour
 
     void Start() {
         _passengerMgr = new PassengerManager();
-        _passengerGenerator = new PassengerGenerator(map, _passengerMgr); 
+        _passengerGenerator = new PassengerGenerator(map, _passengerMgr, passengerViewFactory); 
 
         StartCoroutine(this.MainLoop());
     }
