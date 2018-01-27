@@ -48,20 +48,25 @@ public class Bus : IBus {
         _passengers.Remove(passenger);
     }
 
-    private void _busPassengersCheckStation(IStation station) {
-        Debug.Log(_passengers + "" + _passengers.Count);
+    private List<IPassenger> _busPassengersCheckStation(IStation station) {
+        List<IPassenger> arriveds = new List<IPassenger>();
         for (int i = 0; i < _passengers.Count; i++) {
-            _passengers[i].PassThroughNextStation(station, this);
-        } 
+            bool isArrived = _passengers[i].PassThroughNextStation(station, this);
+            if (isArrived) {
+                arriveds.Add(_passengers[i]);
+            }
+        }
+        return arriveds;
     }
 
-    private void _stationPassengersAboardBus(IStation station) {
+    private List<IPassenger> _stationPassengersAboardBus(IStation station) {
 		var waitingPassengers = new List<IPassenger> ();
 		station.PickupPassengers(_capacity - _passengers.Count, waitingPassengers);
         foreach (IPassenger passneger in waitingPassengers) {
             passneger.AboardBus(this);
             _passengers.Add(passneger);
         }
+        return waitingPassengers;
     }
 
     private void _busPassengersAllGetOff(IStation station) {

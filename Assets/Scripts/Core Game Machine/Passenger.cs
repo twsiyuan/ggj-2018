@@ -37,19 +37,23 @@ public class Passenger : IPassenger {
         _status = PassengerStatus.Moving;
     } 
 
-    public void PassThroughNextStation(IStation station, IBus bus) {
+    public bool PassThroughNextStation(IStation station, IBus bus) {
         if (station == _goal) {
             bus.PassengerGetOff(this);
             _success();
+            return true;
         }
+        return false;
     }
 
-    public void GetOffFromBusAndArriveStation(IStation station) {
+    public bool GetOffFromBusAndArriveStation(IStation station) {
         if (station == _goal) {
             _success();
+            return true;
         }
         else {
             _remainWaitingAtStation(station);
+            return false;
         }
     }
 

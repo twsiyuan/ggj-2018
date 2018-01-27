@@ -33,16 +33,14 @@ public class PassengerGenerator : IPassengerGenerator
     }
 
     private void _generatePassenger() {
-		// TODO: Buffer
-		var stations = new List<IStation>();
+		var stations = new List<IStation>(); 
 		_map.GetAllStations(stations);
         int startIdx = _rand.Next(stations.Count);
         IStation start = stations[startIdx];
         stations.Remove(start);
         int goalIdx = _rand.Next(stations.Count);
         IStation goal = stations[goalIdx];
-
-        Debug.Log("passenger at " + startIdx + " goto "+ goalIdx);
+         
         IPassengerView passengerView = _passengerViewFactory.MakePassengerView();
         _passengerMgr.AddPassenger( new Passenger(start, goal, passengerView) );
     }

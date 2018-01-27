@@ -6,11 +6,10 @@ using System.Collections.Generic;
 [Serializable]
 public class AnimateManager : MonoBehaviour, IAnimateManager
 {
-    private IBusView _busView;
-    private BusViewFactory _busViewFactory;
+    private IBusView _busView; 
 
     [SerializeField]
-    private BusViewFactory busViewFactory;
+    private BusViewFactory _busViewFactory;
 
     public void PlayBusAnimate(IBus bus) {
 
