@@ -157,8 +157,24 @@ public class GameMachine_Prototype : MonoBehaviour, IDragSensorManager
 
         foreach (var linker in linkers)
             EnableLinker(linker.Key, false);
+
+		if (this.Completed != null) {
+			this.Completed (this, new CompletedEventArgs(){
+				Stations = null,
+			});
+		}
     }
 
     public Action<List<int>> SensorComplete;
-    
+	public event System.EventHandler<CompletedEventArgs> Completed;
+
+	public class CompletedEventArgs : System.EventArgs
+	{
+		public List<IStation> Stations
+		{
+			get;
+			set;
+		}
+	}
 }
+
