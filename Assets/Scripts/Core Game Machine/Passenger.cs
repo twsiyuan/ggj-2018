@@ -14,7 +14,7 @@ public class Passenger : IPassenger {
     public bool IsMoving { get { return _status == PassengerStatus.Moving; } }
     public bool IsArrived { get { return _status == PassengerStatus.Arrived; } }
 
-    private readonly int _rageMax = 1000;
+    private readonly int _rageMax = 10000;
     private int _rage;
     private readonly int _waitingRage = 1;
     private readonly int _movingRage = 0;
@@ -23,6 +23,7 @@ public class Passenger : IPassenger {
     private IStation _start;
     private IStation _goal;
     private IPassengerView _view;
+    public IPassengerView View { get { return _view; } }
 
     public Passenger(IStation start, IStation goal, IPassengerView view) {
         _start = start;
@@ -38,6 +39,7 @@ public class Passenger : IPassenger {
     } 
 
     public bool PassThroughNextStation(IStation station, IBus bus) {
+
         if (station == _goal) {
             bus.PassengerGetOff(this);
             _success();

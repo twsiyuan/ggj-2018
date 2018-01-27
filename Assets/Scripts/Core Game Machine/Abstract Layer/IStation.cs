@@ -28,6 +28,8 @@ public interface IStation
     /// 車站的索引
     /// </summary>
     int Index { get; }
+
+    int WaitingNumber { get; }
     
     /// <summary>
     /// 判斷是否為主車站

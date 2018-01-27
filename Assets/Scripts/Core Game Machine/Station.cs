@@ -27,8 +27,12 @@ public class Station : IStation
 			return this.Map.GetStationIndex (this);
 		}
 	}
-		
-	private List<IPassenger> passengers = new List<IPassenger>();
+
+    public int WaitingNumber {
+        get { return passengers.Count; }
+    }
+
+    private List<IPassenger> passengers = new List<IPassenger>();
 
 	public IRoad GetRoad (IStation station){
 		return this.Map.GetRoad (this, station);

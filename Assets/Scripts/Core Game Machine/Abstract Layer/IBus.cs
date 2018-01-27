@@ -7,7 +7,7 @@ public interface IBus
     void StartBusPath(List<IStation> path);
     List<IStation> BusPath { get; }
 
-    void PassThroughStation(IStation station);
+    List<IPassenger> PassThroughStation(IStation station);
 
     void PassengerGetOff(IPassenger passenger);
 }
