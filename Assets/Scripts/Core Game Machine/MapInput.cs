@@ -41,8 +41,6 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
     private Vector2 pressPos;
 
-    [SerializeField]
-    private bool allowSensorInput;
 
     [SerializeField]
     private int start = -1;
@@ -99,14 +97,9 @@ public class MapInput : MonoBehaviour, IDragSensorManager
         sensors = null;
     }
 
-    public void EnableSensorInput(bool enable)
-    {
-        allowSensorInput = enable;
-    }
-
     public void RegisterSensor(int sensorID)
     {
-        if(!allowSensorInput)
+        if(!this.enabled)
             return;
 
         var station = map.GetStation(sensorID);
@@ -123,7 +116,7 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
     public void OverlapSensor(int sensorID)
     {   
-        if(!allowSensorInput)
+        if(!this.enabled)
             return;
 
         if(start == -1)
@@ -161,7 +154,7 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
     public void SplitSensor(int sensorID)
     {   
-        if(!allowSensorInput)
+        if(!this.enabled)
             return;
 
         if(end == -1)
@@ -174,7 +167,7 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
     public void RemoveSensor(int sensorID)
     {
-        if(!allowSensorInput)
+        if(!this.enabled)
             return;
 
         RemoveSensorHook();
