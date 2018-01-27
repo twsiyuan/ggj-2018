@@ -13,6 +13,12 @@ public class PassengerView : IPassengerView
 
     private readonly float _interval = 0.5f;
     private readonly float _duration = 0.5f;
+
+    private readonly Vector3 _impatientScale = new Vector3(1f, 1f, 1f);
+    private readonly float _impatientShowTime = 0.4f;
+    private readonly Vector3 _furiousScale = new Vector3(1.6f, 1.6f, 1.6f);
+    private readonly float _furiousShowTime = 0.8f;
+
     private readonly float _arriveFadeDuration = 1f;
     private readonly float _failFadeDuration = 3f;
 
@@ -33,9 +39,11 @@ public class PassengerView : IPassengerView
     }
     public void ChangeToFace2() {
         _facePrefab.GetComponent<SpriteRenderer>().sprite = _faceMgr.GetFace2Texture();
+        _facePrefab.transform.DOPunchScale(_impatientScale, _impatientShowTime).Play(); 
     }
     public void ChangeToFace3() {
         _facePrefab.GetComponent<SpriteRenderer>().sprite = _faceMgr.GetFace3Texture();
+        _facePrefab.transform.DOPunchScale(_furiousScale, _furiousShowTime).Play();
     }
 
     public void ShowViewPositionAtStation(Transform stationTransform, int order) {
@@ -76,6 +84,7 @@ public class PassengerView : IPassengerView
 
     public void FailedAnimate(IStation station) {
         _facePrefab.GetComponent<SpriteRenderer>().DOFade(0.0f, _failFadeDuration).Play();
+        _labelPrefab.GetComponent<SpriteRenderer>().DOFade(0.0f, _failFadeDuration).Play();
         _passengerPrefab.GetComponent<SpriteRenderer>().DOFade(0.0f, _failFadeDuration).Play().OnComplete(() => {
             MonoBehaviour.Destroy(_passengerPrefab);
             station.RearrangePassengersView();
