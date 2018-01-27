@@ -5,6 +5,10 @@ public interface IPassengerView
 {
     void ShowViewPositionAtStation(Transform stationTransform, int order);
 
+    void ChangeToFace1();
+    void ChangeToFace2();
+    void ChangeToFace3();
+
     void RearrangePositionAnimateAtStation(Transform stationTransform, int order);
 
     IEnumerator AboardBusAnimate(Transform stationTransform);

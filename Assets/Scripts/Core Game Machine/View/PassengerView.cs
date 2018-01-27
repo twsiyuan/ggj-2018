@@ -8,18 +8,25 @@ public class PassengerView : IPassengerView
 {
     private GameObject _passengerPrefab;
     private GameObject _facePrefab;
+    private PassengerFaceManager _faceMgr;
 
     private readonly float _interval = 0.5f;
     private readonly float _duration = 0.5f;
     private readonly float _fadeDuration = 1f;
 
-    public PassengerView(GameObject passenger, GameObject face) {
+    public PassengerView(GameObject passenger) {
         _passengerPrefab = passenger;
         _passengerPrefab.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
 
-        _facePrefab = face;
+        _facePrefab = _passengerPrefab.transform.GetChild(0).gameObject;
         _facePrefab.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+
+        _faceMgr = _facePrefab.GetComponent<PassengerFaceManager>();
     }
+
+    public void ChangeToFace1() { }
+    public void ChangeToFace2() { }
+    public void ChangeToFace3() { }
 
     public void ShowViewPositionAtStation(Transform stationTransform, int order) {
         Vector3 pos = stationTransform.position;
