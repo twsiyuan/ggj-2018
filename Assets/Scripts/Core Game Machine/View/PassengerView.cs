@@ -12,7 +12,8 @@ public class PassengerView : IPassengerView
 
     private readonly float _interval = 0.5f;
     private readonly float _duration = 0.5f;
-    private readonly float _fadeDuration = 1f;
+    private readonly float _arriveFadeDuration = 1f;
+    private readonly float _failFadeDuration = 3f;
 
     public PassengerView(GameObject passenger) {
         _passengerPrefab = passenger;
@@ -65,8 +66,14 @@ public class PassengerView : IPassengerView
         _passengerPrefab.transform.position = pos;
         _passengerPrefab.SetActive(true);
         _passengerPrefab.GetComponent<SpriteRenderer>().sortingOrder = 3;
-        _passengerPrefab.GetComponent<SpriteRenderer>().DOFade(0.0f, _fadeDuration).Play().OnComplete(() => {
+        _passengerPrefab.GetComponent<SpriteRenderer>().DOFade(0.0f, _arriveFadeDuration).Play().OnComplete(() => {
             _passengerPrefab.SetActive(false);
+        });
+    }
+
+    public void FailedAnimate() {
+        _passengerPrefab.GetComponent<SpriteRenderer>().DOFade(0.0f, _failFadeDuration).Play().OnComplete(() => {
+            MonoBehaviour.Destroy(_passengerPrefab);
         });
     }
 }

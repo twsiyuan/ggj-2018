@@ -7,14 +7,16 @@ public class PassengerGenerator : IPassengerGenerator
 {
     private System.Random _rand;
     private float _timer;
-    private readonly int _waitInterval; 
+    private readonly int _waitInterval;
 
+    private GameController _gameCtrl;
     private IMap _map;
     private IPassengerManager _passengerMgr;
     private PassengerViewFactory _passengerViewFactory;
 
     public PassengerGenerator(
-        IMap map, IPassengerManager passengerMgr, PassengerViewFactory passengerViewFactory) {
+        GameController gameCtrl, IMap map, IPassengerManager passengerMgr, PassengerViewFactory passengerViewFactory) {
+        _gameCtrl = gameCtrl;
         _map = map;
         _passengerMgr = passengerMgr;
         _passengerViewFactory = passengerViewFactory;
@@ -42,7 +44,7 @@ public class PassengerGenerator : IPassengerGenerator
         IStation goal = stations[goalIdx];
          
         IPassengerView passengerView = _passengerViewFactory.MakePassengerView();
-        _passengerMgr.AddPassenger( new Passenger(start, goal, passengerView) );
+        _passengerMgr.AddPassenger( new Passenger(start, goal, passengerView, _gameCtrl) );
     }
 
     private void _resetTimer() {
