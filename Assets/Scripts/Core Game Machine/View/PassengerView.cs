@@ -24,9 +24,15 @@ public class PassengerView : IPassengerView
         _faceMgr = _facePrefab.GetComponent<PassengerFaceManager>();
     }
 
-    public void ChangeToFace1() { }
-    public void ChangeToFace2() { }
-    public void ChangeToFace3() { }
+    public void ChangeToFace1() {
+        _facePrefab.GetComponent<SpriteRenderer>().sprite = _faceMgr.GetFace1Texture();
+    }
+    public void ChangeToFace2() {
+        _facePrefab.GetComponent<SpriteRenderer>().sprite = _faceMgr.GetFace2Texture();
+    }
+    public void ChangeToFace3() {
+        _facePrefab.GetComponent<SpriteRenderer>().sprite = _faceMgr.GetFace3Texture();
+    }
 
     public void ShowViewPositionAtStation(Transform stationTransform, int order) {
         Vector3 pos = stationTransform.position;
