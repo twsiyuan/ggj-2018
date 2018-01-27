@@ -42,4 +42,8 @@ public class BusView : IBusView
         angle.eulerAngles = new Vector3(0f, yAngle, 0f);
         _busPrefab.transform.localRotation = angle;
     }
+
+    public void RemoveBusView() { 
+        MonoBehaviour.Destroy(_busPrefab);
+    }
 }

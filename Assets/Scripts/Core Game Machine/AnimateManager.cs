@@ -5,26 +5,22 @@ using System.Collections.Generic;
 
 [Serializable]
 public class AnimateManager : MonoBehaviour, IAnimateManager
-{
-    private IBusView _busView; 
-
+{ 
     [SerializeField]
     private BusViewFactory _busViewFactory;
 
-    public void PlayBusAnimate(IBus bus) {
-
-        Debug.Log("Play animate");
-
-        StartCoroutine(_playBusAnimate(bus));
+    public void PlayBusAnimate(BusCenter busCenter, IBus bus) { 
+        Debug.Log("Play animate"); 
+        StartCoroutine(_playBusAnimate(busCenter, bus));
     }
 
-    private IEnumerator _playBusAnimate(IBus bus) {
+    private IEnumerator _playBusAnimate(BusCenter busCenter, IBus bus) {
 
         List<IStation> stations = bus.BusPath;
 
-        _busView = _busViewFactory.MakeBusView();
+        IBusView _busView = _busViewFactory.MakeBusView();
 
-		yield return _busView.InitAnimate(stations[0].Transform.position);
+        yield return _busView.InitAnimate(stations[0].Transform.position);
         yield return _waitPassThourghStation(bus, _busView, stations[0]);
 
         for (int i = 1; i < stations.Count; i++) {
@@ -34,8 +30,9 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
         }
 
         yield return null;
-
-        GameObject.Destroy(_busView.Transform.gameObject);
+         
+        _busView.RemoveBusView();
+        busCenter.RecycleBus(bus);
     }
 
     private IEnumerator _waitPassThourghStation(IBus bus, IBusView busView, IStation station) {

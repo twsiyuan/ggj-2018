@@ -1,4 +1,4 @@
 ﻿public interface IAnimateManager
 {
-    void PlayBusAnimate(IBus bus);
+    void PlayBusAnimate(BusCenter busCenter, IBus bus);
 }
