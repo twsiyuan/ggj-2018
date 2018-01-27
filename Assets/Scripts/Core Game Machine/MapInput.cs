@@ -14,15 +14,31 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 	}
 
 	public class SelectEndEventArgs : System.EventArgs{
-		public IStation[] Stations {
+		public IEnumerable<IStation> Stations {
 			get;
 			set;
 		}
 	}
 
+	public class SelectingEventArgs : System.EventArgs{
+		public IEnumerable<IStation> Stations {
+			get;
+			set;
+		}
+
+		public Vector3 CurrentPosition {
+			get;
+			set;
+		}
+	}
+
+	SelectingEventArgs selectingEventArgs = new SelectingEventArgs();
+
 	public event System.EventHandler<SelectStartEventArgs> SelectStarted;
 
 	public event System.EventHandler<SelectEndEventArgs> SelectEnded;
+
+	public event System.EventHandler<SelectingEventArgs> SelectProcessing;
 
     #region [ Fields / Properties - Sensor]
 
@@ -50,6 +66,8 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
     [SerializeField]
     private List<int> busTargets = new List<int>();
+
+	bool selecting = false;
     
     #endregion
 
@@ -112,6 +130,15 @@ public class MapInput : MonoBehaviour, IDragSensorManager
         start = sensorID;
 
         RegisterSensorHook();
+
+		// This is start
+		this.selecting = true;
+
+		if (this.SelectStarted != null) {
+			this.SelectStarted (this, new SelectStartEventArgs(){
+				Station = map.GetStation(start),
+			});
+		}
     }
 
     public void OverlapSensor(int sensorID)
@@ -169,25 +196,59 @@ public class MapInput : MonoBehaviour, IDragSensorManager
     {
         if(!this.enabled)
             return;
-
-        RemoveSensorHook();
-
-        start = -1;
-
-        end = -1;
+  
+		this.InvokeEndEvent ();
+		this.ClearSelectionState ();
     }
+
+	void OnDisable(){
+
+		if (this.selecting) {
+			this.InvokeEndEvent ();
+		}
+
+		this.ClearSelectionState ();
+
+	}
+
+	void ClearSelectionState(){
+		RemoveSensorHook();
+
+		start = -1;
+		end = -1;
+		this.selecting = false;
+	}
+
+	void Update(){
+		if (this.selecting) {
+			if (this.SelectProcessing != null) {
+				var e = this.selectingEventArgs;
+				e.Stations = busTargets.Select (v => map.GetStation (v));
+				e.CurrentPosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+
+				this.SelectProcessing (this, e);
+			}
+		}
+	}
+
+	void InvokeEndEvent(){
+		// This is end
+		if (this.SelectEnded != null) {
+			this.SelectEnded (this, new SelectEndEventArgs(){
+				Stations = busTargets.Select(v => map.GetStation(v)),
+			});
+		}
+
+		#if UNITY_EDITOR
+		Debug.LogFormat ("Selected Bus: {0}", string.Join(", ", this.busTargets.Select(v => v.ToString()).ToArray()));
+		#endif
+	}
 
     public virtual void DragSensor(Vector2 pos) { }
 
     protected virtual void RegisterSensorHook()
     { 
          busTargets.Add(start);
-
-		if (this.SelectStarted != null) {
-			this.SelectStarted (this, new SelectStartEventArgs(){
-				Station = map.GetStation(start),
-			});
-		}
     }
 
     protected virtual void OverlapSensorHook() { }
@@ -196,30 +257,15 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
     protected virtual void RemoveSensorHook()
     {
-        SendStationPaths();
-
         busTargets.Clear();
 
         foreach (var linker in linkers)
             EnableLinker(linker.Key, false);
+
+		// 
     }
 
-    private void SendStationPaths()
-    {
-        if(busTargets.Count <= 1)
-            return;
-
-        if (this.SelectEnded != null) {
-			this.SelectEnded (this, new SelectEndEventArgs(){
-				Stations = busTargets.Select(v => map.GetStation(v)).ToArray(),
-			});
-		}
-
-		#if UNITY_EDITOR
-		Debug.LogFormat ("Selected Bus: {0}", string.Join(", ", this.busTargets.Select(v => v.ToString()).ToArray()));
-		#endif
-    }
-    
+  
     #endregion
     
 }

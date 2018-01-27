@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public partial class GameController : MonoBehaviour
@@ -45,7 +46,10 @@ public partial class GameController : MonoBehaviour
 
 	private void OnMapInput_SelectEnded (object sender, MapInput.SelectEndEventArgs e)
 	{
-		this.stationsBuffer.Enqueue (e.Stations);
+		var count = e.Stations.Count ();
+		if (count > 1) {
+			this.stationsBuffer.Enqueue (e.Stations.ToArray ());
+		}
 	}
 
     private void Start() {
