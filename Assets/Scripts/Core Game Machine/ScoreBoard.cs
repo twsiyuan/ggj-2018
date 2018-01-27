@@ -28,10 +28,15 @@ public class ScoreBoard : MonoBehaviour
         view.UpdateScore(temp, score);
     }
 
-    public void AddPassengerCompletion()
+    public void AddPassengerCompletion(IPassenger passenger)
     {
         completion++;
         view.UpdatePassengerCompletion(completion);
+    }
+
+    public void LosePassenger(IPassenger passenger)
+    {
+        AddRage(1);
     }
 
     public void AddRage(int value)
@@ -54,13 +59,13 @@ public class ScoreBoard : MonoBehaviour
         view.UpdateDepot(value);
     }
 
-    public void AddWaitingPassenger()
+    public void AddWaitingPassenger(IPassenger passenger)
     {
         waiting++;
         view.UpdateWaitingPassenger(waiting);
     }
 
-    public void RemoveWaitingPassenger()
+    public void RemoveWaitingPassenger(IPassenger passenger)
     {
         waiting--;
         view.UpdateWaitingPassenger(waiting);

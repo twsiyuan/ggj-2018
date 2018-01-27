@@ -142,8 +142,7 @@ public class Passenger : IPassenger {
             StopWaitingEvent.Invoke(this);
         if (AngryExitEvent != null)
             AngryExitEvent.Invoke(this); 
-
-        _gameCtrl.AddRage(1);
+            
         _view.FailedAnimate(_stand);
         _stand.ExitStation(this);
     }

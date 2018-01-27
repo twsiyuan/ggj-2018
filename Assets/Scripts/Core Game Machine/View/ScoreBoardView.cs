@@ -29,7 +29,7 @@ public class ScoreBoardView
     
     public void UpdatePassengerCompletion(int value)
     {
-        score.text = "累積乘載數: " + value.ToString();
+        completion.text = "累積乘載數: " + value.ToString();
     }
 
     public void UpdateWaitingPassenger(int value)

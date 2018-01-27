@@ -63,10 +63,10 @@ public partial class GameController : MonoBehaviour
 
         _passengerEventManager = new PassengerEventManager(_passengerGenerator);
 
-        _passengerEventManager.StartWaitingEvent += (p) => { Debug.Log("waiting +1"); };
-        _passengerEventManager.StopWaitingEvent += (p) => { Debug.Log("waiting -1"); };
-        _passengerEventManager.SuccessArriveEvent += (p) => { Debug.Log("success +1"); };
-        _passengerEventManager.AngryExitEvent += (p) => { Debug.Log("angry +1"); };
+        _passengerEventManager.StartWaitingEvent += scoreBoard.AddWaitingPassenger;
+        _passengerEventManager.StopWaitingEvent += scoreBoard.RemoveWaitingPassenger;
+        _passengerEventManager.SuccessArriveEvent += scoreBoard.AddPassengerCompletion;
+        _passengerEventManager.AngryExitEvent += scoreBoard.LosePassenger;
 
         InitSubSystems();
 
