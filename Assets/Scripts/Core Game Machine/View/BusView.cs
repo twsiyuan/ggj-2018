@@ -32,7 +32,5 @@ public class BusView :IBusView
 		_busPrefab.transform.position = road.GetPosition (1);
         Debug.Log("arrive " + _busPrefab.transform.position);
     }
-
-    public void WaitAboardAnimate() {
-    }
+    
 }

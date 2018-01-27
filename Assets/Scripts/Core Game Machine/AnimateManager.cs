@@ -7,11 +7,10 @@ using System.Collections.Generic;
 public class AnimateManager : MonoBehaviour, IAnimateManager
 {
     private IBusView _busView;
-    private IBusViewFactory _busViewFactory;
+    private BusViewFactory _busViewFactory;
 
-    public AnimateManager() {
-        _busViewFactory = new BusViewFactory();
-    }
+    [SerializeField]
+    private BusViewFactory busViewFactory;
 
     public void PlayBusAnimate(IBus bus) {
 
@@ -31,8 +30,14 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
         for (int i = 1; i < stations.Count; i++) {
 			var road = stations [i - 1].GetRoad (stations[i]);
 			yield return _busView.MoveToStationAnimate(road);
+            yield return _waitStationAboard(bus, stations[i]);
         }
 
+        yield return null;
+    }
+
+    private IEnumerator _waitStationAboard(IBus bus, IStation station) {
+        bus.PassThroughStation(station);
         yield return null;
     }
 }
