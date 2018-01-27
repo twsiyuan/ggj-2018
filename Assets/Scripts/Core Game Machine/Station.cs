@@ -5,51 +5,48 @@ using UnityEngine;
 [Serializable]
 public class Station : IStation
 {
+	public IMap Map
+	{
+		get;
+		internal set;
+	}
 
-    [SerializeField]
-    private int index;
-    public int Index { get {return index;} }
+	public bool IsMainStation {
+		get;
+		set;
+	}
 
-    [SerializeField]
-    private bool mainStation;
-
-    [SerializeField]
-    private int[] neighbors;
-
-    private List<IPassenger> passengers;
-
-    public Station() {
-        passengers = new List<IPassenger>();
-    }
-
-    public bool IsMainStation()
-    {
-        return mainStation;
-    }
+	public int Index { 
+		get
+		{
+			return this.Map.GetStationIndex (this);
+		}
+	}
+		
+	private List<IPassenger> passengers = new List<IPassenger>();
 
 	public bool IsNeighbor(int index)
     {
-        foreach (var neighbor in neighbors)
-            if(neighbor == index)
-                return true;
-
-        return false;
+		return this.Map.IsNeighbor (this.Index, index);
     }
+		
+	public bool IsNeighbor(IStation station){
+		return this.Map.IsNeighbor(this, station);
+	}
 
     public void NewPassenger(IPassenger passenger)
     {
         passengers.Add(passenger);
     }
 
-    public List<IPassenger> GetPassengers(int seats)
+	public void PickupPassengers(int seats, List<IPassenger> output)
     {
         int num = passengers.Count > seats ? seats : passengers.Count;
-        List<IPassenger> aboards = new List<IPassenger>();
+		output.Clear ();
         for (int i = 0; i < num; i++) {
-            aboards.Add(passengers[i]);
+			output.Add(passengers[i]);
         }
-        passengers.RemoveRange(0, num);
-        return aboards;
+        this.passengers.RemoveRange(0, num);
     }
     
 }

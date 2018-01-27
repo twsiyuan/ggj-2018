@@ -8,7 +8,7 @@ public class Map : MonoBehaviour, IMap, IDragSensorManager
     #region [ Fields / Properties - Stations]
 
     [SerializeField]
-    private List<Station> stations;
+    private List<IStation> stations;
 
     [SerializeField]
     private List<Station> hidingStations;
@@ -50,36 +50,76 @@ public class Map : MonoBehaviour, IMap, IDragSensorManager
 
 
     #region [ Stations ]
+	// One-way link
+	Dictionary<IStation, IStation> links = new Dictionary<IStation, IStation>();
     
     public bool HasHidingStation()
     {
         return hidingStations.Count > 0; 
     }
     
-    public void AddStation()
+	public int AddStation(IStation station)
     {
-        var pos = UnityEngine.Random.Range(0, hidingStations.Count);
-
-        var station = hidingStations[pos];
-
-        hidingStations.RemoveAt(pos);
-
         stations.Add(station);
+		return stations.Count - 1;
     }
 
     public IStation GetStation(int index)
     {
         return stations[index];
     }
+		
+	public int GetStationIndex(IStation station)
+	{
+		return stations.IndexOf (station);
+	}
 
-    public List<IStation> GetAllStations()
+	public void AddLink (IStation stationA, IStation stationB){
+		if (stationA == null || stationB == null) {
+			throw new System.ArgumentNullException ();
+		}
+
+		this.links.Add (stationA, stationB);
+		this.links.Add (stationB, stationA);
+	}
+
+	public void AddLink (int indexA, int indexB){
+		this.AddLink (GetStation(indexA), GetStation(indexB));
+	}
+		
+	public bool IsNeighbor(int indexA, int indexB){
+		return this.IsNeighbor (GetStation(indexA), GetStation(indexB));
+	}
+		
+	public bool IsNeighbor(IStation stationA, IStation stationB){
+		IStation temp;
+		if (this.links.TryGetValue (stationA, out temp)) {
+			if (stationB == temp) {
+				return true;
+			}
+		}
+
+		if (this.links.TryGetValue (stationB, out temp)) {
+			if (stationA == temp) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public IEnumerable<IStation> GetAllStations()
+	{
+		foreach (var s in stations) {
+			yield return s;
+		}
+	}
+
+	public void GetAllStations(List<IStation> output)
     {
-        var output = new List<IStation>();
-
+		output.Clear ();
         foreach (var s in stations)
             output.Add(s);
-
-        return output;
     }
     
     #endregion
@@ -121,7 +161,7 @@ public class Map : MonoBehaviour, IMap, IDragSensorManager
     public void RegisterSensor(int sensorID)
     {
         var station = map.GetStation(sensorID);
-        if(!station.IsMainStation())
+        if(!station.IsMainStation)
             return;
 
         if(start == end)

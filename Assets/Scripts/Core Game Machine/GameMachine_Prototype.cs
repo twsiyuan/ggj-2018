@@ -74,7 +74,7 @@ public class GameMachine_Prototype : MonoBehaviour, IDragSensorManager
     public void RegisterSensor(int sensorID)
     {
         var station = map.GetStation(sensorID);
-        if(!station.IsMainStation())
+        if(!station.IsMainStation)
             return;
 
         if(start == end)

@@ -31,7 +31,9 @@ public class PassengerGenerator : IPassengerGenerator
     }
 
     private void _generatePassenger() {
-        List<IStation> stations = _map.GetAllStations();
+		// TODO: Buffer
+		var stations = new List<IStation>();
+		_map.GetAllStations(stations);
         int startIdx = _rand.Next(stations.Count);
         IStation start = stations[startIdx];
         stations.Remove(start);
