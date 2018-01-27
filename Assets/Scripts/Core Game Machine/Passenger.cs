@@ -130,8 +130,6 @@ public class Passenger : IPassenger {
 
     private void _success() {
         _status = PassengerStatus.Arrived;
-        if (StopWaitingEvent != null)
-            StopWaitingEvent.Invoke(this);
         if (SuccessArriveEvent != null)
             SuccessArriveEvent.Invoke(this);
     }
@@ -142,7 +140,7 @@ public class Passenger : IPassenger {
             StopWaitingEvent.Invoke(this);
         if (AngryExitEvent != null)
             AngryExitEvent.Invoke(this); 
-            
+
         _view.FailedAnimate(_stand);
         _stand.ExitStation(this);
     }

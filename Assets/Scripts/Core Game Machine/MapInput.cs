@@ -235,10 +235,6 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 				Stations = busTargets.Select(v => map.GetStation(v)),
 			});
 		}
-
-		#if UNITY_EDITOR
-		Debug.LogFormat ("Selected Bus: {0}", string.Join(", ", this.busTargets.Select(v => v.ToString()).ToArray()));
-		#endif
 	}
 
     public virtual void DragSensor(Vector2 pos) { }

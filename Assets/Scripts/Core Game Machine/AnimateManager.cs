@@ -10,7 +10,6 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
     private BusViewFactory _busViewFactory;
 
     public void PlayBusAnimate(BusCenter busCenter, IBus bus) { 
-        Debug.Log("Play animate"); 
         StartCoroutine(_playBusAnimate(busCenter, bus));
     }
 

@@ -18,7 +18,6 @@ public class BusView : IBusView
         float duration = 0.5f;
         _busPrefab.transform.position = position;
         yield return new WaitForSeconds(duration);
-        Debug.Log("arrive " + _busPrefab.transform.position);
     }
 
 	public IEnumerator MoveToStationAnimate(IRoad road) {

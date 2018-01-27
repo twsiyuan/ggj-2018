@@ -13,9 +13,7 @@ public partial class GameController : MonoBehaviour
 				continue;
 			}
 
-			Debug.Log("start listen next bus mission");
 			var stations = this.stationsBuffer.Dequeue ();
-			Debug.Log("Listener get the result : "+ string.Join(",", stations.Select(v => v.Index.ToString()).ToArray()));
              
             IBus bus = busCenter.LaunchBus(new List<IStation> (stations));
             
