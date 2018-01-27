@@ -14,4 +14,7 @@ public class ReverseRoad : IRoad {
 		return this.road.GetPosition (1- t);
 	}
 
+	public float GetTotalDistance(){
+		return this.road.GetTotalDistance();
+	}
 }
