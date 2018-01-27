@@ -1,7 +1,10 @@
-﻿public interface IBusView
+﻿using System.Collections;
+using UnityEngine;
+
+public interface IBusView
 {
-    void InitAnimate();
-    void MoveToStationAnimate();
+    IEnumerator InitAnimate(Transform stationTransform);
+    IEnumerator MoveToStationAnimate(Transform stationTransform);
     void WaitAboardAnimate();
 
 }

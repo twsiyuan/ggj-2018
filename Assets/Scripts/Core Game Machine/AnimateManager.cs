@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [Serializable]
 public class AnimateManager : MonoBehaviour, IAnimateManager
@@ -16,20 +17,24 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
 
         Debug.Log("Play animate");
 
-        StartCoroutine(_playBusAnimate());
+        StartCoroutine(_playBusAnimate(bus));
     }
 
-    private IEnumerator _playBusAnimate() {
+    private IEnumerator _playBusAnimate(IBus bus) {
+
+        List<IStation> stations = bus.BusPath;
 
         _busView = _busViewFactory.MakeBusView();
 
-        _busView.InitAnimate();
+        yield return _busView.InitAnimate(stations[0].Transform); 
 
-        Debug.Log("bus start");
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log("bus go 1");
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log("bus go 2");
+        for (int i = 1; i < stations.Count; i++) {
+            IStation current = stations[i];
+            Transform stationTransform = current.Transform;
+            Debug.Log("go to " + stationTransform.position);
+            yield return _busView.MoveToStationAnimate(stationTransform);
+        }
 
+        yield return null;
     }
 }
