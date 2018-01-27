@@ -47,7 +47,7 @@ public class MapGenerator : MonoBehaviour
 				var ss = map[l.StartStation];
 				var es = map[l.EndStation];
 
-				target.AddLink (ss, es);
+				target.AddLink (ss, es, l.Road);
 			}
 		}
 	}

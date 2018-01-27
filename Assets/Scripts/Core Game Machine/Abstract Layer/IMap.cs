@@ -24,14 +24,20 @@ public interface IMap
 	/// </summary>
 	/// <param name="stationA">Station a.</param>
 	/// <param name="stationB">Station b.</param>
-	void AddLink (IStation stationA, IStation stationB);
+	void AddLink (IStation stationA, IStation stationB, IRoad road);
 
 	/// <summary>
 	/// 新增車站連結
 	/// </summary>
 	/// <param name="stationA">Station a.</param>
 	/// <param name="stationB">Station b.</param>
-	void AddLink (int indexA, int indexB);
+	void AddLink (int indexA, int indexB, IRoad road);
+
+
+	/// <summary>
+	/// 取得前往鄰近車站的道路 (null) 表示非鄰近
+	/// </summary>
+	IRoad GetRoad (IStation stationA, IStation stationB);
 
 
 	/// <summary>

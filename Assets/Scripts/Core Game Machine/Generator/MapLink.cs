@@ -24,6 +24,15 @@ public class MapLink : MonoBehaviour
 		}
 	}
 
+	public IRoad Road{
+		get{
+			// TODO: 不同的設計...一個介面來處理??
+			var p1 = this.StartStation.transform.position;
+			var p2 = this.EndStation.transform.position;
+			return new Road(p1, p2);
+		}
+	}
+
 	public bool IsValid
 	{
 		get{
