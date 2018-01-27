@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using MarsCode113.ServiceFramework;
+using UnityEngine;
 
 public partial class GameController : MonoBehaviour
 {
@@ -56,9 +56,10 @@ public partial class GameController : MonoBehaviour
     private void Start() { 
 
         _passengerMgr = new PassengerManager();
+		
         _passengerGenerator = new PassengerGenerator(this, map, _passengerMgr, passengerViewFactory); 
 
-		InitBusCenter();
+		InitSubSystems();
 
         StartCoroutine(this.MainLoop());
     }
