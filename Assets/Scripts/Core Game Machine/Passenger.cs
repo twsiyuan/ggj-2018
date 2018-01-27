@@ -23,6 +23,7 @@ public class Passenger : IPassenger {
 
     private IStation _start;
     private IStation _goal;
+    private IStation _stand;
     private IPassengerView _view;
     public IPassengerView View { get { return _view; } }
 
@@ -40,10 +41,10 @@ public class Passenger : IPassenger {
 
     public void AboardBus(IBus bus) {
         _status = PassengerStatus.Moving;
+        _stand = null;
     } 
 
     public bool PassThroughNextStation(IStation station, IBus bus) {
-
         if (station == _goal) {
             bus.PassengerGetOff(this);
             _success();
@@ -66,16 +67,18 @@ public class Passenger : IPassenger {
     public void UpdateRage() {
         if (_status == PassengerStatus.Waiting) {
             _addWaitingRage();
+            _updateRageFace();
+            if (_rage > _rageMax) {
+                _fail();
+            }
         }
         else if (_status == PassengerStatus.Moving) {
             _addMovingRage();
-        }
-
-        _updateRageFace();
-
-        if (_rage > _rageMax) {
-            _fail();
-        }
+            _updateRageFace();
+            if (_rage > _rageMax) {
+                _fail();
+            }
+        } 
     }
 
     private void _updateRageFace() {
@@ -88,6 +91,7 @@ public class Passenger : IPassenger {
     private void _waitingAtStation(IStation station) {
         int order = station.NewPassenger(this);
         _status = PassengerStatus.Waiting;
+        _stand = station;
 
         if (_view != null) {
             _view.ShowViewPositionAtStation(station.Transform, order);
@@ -107,7 +111,8 @@ public class Passenger : IPassenger {
         _status = PassengerStatus.Failed;
         Debug.Log("passenger ANGRY!");
         _gameCtrl.AddRage(1);
-        _view.FailedAnimate();
+        _view.FailedAnimate(_stand);
+        _stand.ExitStation(this);
     }
 
     private void _addWaitingRage() {

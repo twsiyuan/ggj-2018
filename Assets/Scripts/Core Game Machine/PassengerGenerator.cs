@@ -39,11 +39,14 @@ public class PassengerGenerator : IPassengerGenerator
 		_map.GetAllStations(stations);
         int startIdx = _rand.Next(stations.Count);
         IStation start = stations[startIdx];
+
         stations.Remove(start);
         int goalIdx = _rand.Next(stations.Count);
         IStation goal = stations[goalIdx];
-         
-        IPassengerView passengerView = _passengerViewFactory.MakePassengerView();
+
+        int lableIdx = _gameCtrl.GetStationIndex(goal);
+        IPassengerView passengerView = _passengerViewFactory.MakePassengerView(lableIdx);
+
         _passengerMgr.AddPassenger( new Passenger(start, goal, passengerView, _gameCtrl) );
     }
 

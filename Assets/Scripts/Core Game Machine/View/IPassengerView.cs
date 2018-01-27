@@ -17,5 +17,5 @@ public interface IPassengerView
 
     void ArrivedStationAnimate(Transform busTransform, int order, int total);
 
-    void FailedAnimate();
+    void FailedAnimate(IStation station);
 }

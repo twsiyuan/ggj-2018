@@ -53,7 +53,8 @@ public partial class GameController : MonoBehaviour
 		}
 	}
 
-    private void Start() {
+    private void Start() { 
+
         _passengerMgr = new PassengerManager();
 		
         _passengerGenerator = new PassengerGenerator(this, map, _passengerMgr, passengerViewFactory); 

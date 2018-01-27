@@ -63,6 +63,10 @@ public class Station : IStation
         this.passengers.RemoveRange(0, num);
     }
 
+    public void ExitStation(IPassenger passenger) {
+        passengers.Remove(passenger);
+    }
+
     public void RearrangePassengersView() {
         for (int i = 0; i < passengers.Count; i++) {
             passengers[i].View.RearrangePositionAnimateAtStation(Transform, i+1);
