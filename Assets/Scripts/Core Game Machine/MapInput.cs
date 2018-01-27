@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,25 +41,17 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
 	public event System.EventHandler<SelectingEventArgs> SelectProcessing;
 
-    #region [ Fields / Properties - Sensor]
+    #region [ Fields / Properties]
 
 	Map map;
-
-    [SerializeField]
-    private Image[] marks;
-
-    [SerializeField]
-    private Image[] imageLinkers;
-
-    [SerializeField]
-    private EmptyGraphic[] sensors;
-
-    private Dictionary<string, Image> linkers = new Dictionary<string, Image>();
 
     private Vector2 pressPos;
 
     [SerializeField]
-    private int numberOfMatches;
+    private bool rejectRepeatLink = true;
+
+    [SerializeField]
+    private int numberOfLinkTimes;
     
     [SerializeField]
     private int start = -1;
@@ -69,7 +62,12 @@ public class MapInput : MonoBehaviour, IDragSensorManager
     [SerializeField]
     private List<int> busTargets = new List<int>();
 
-	private bool selecting = false;
+    [SerializeField]
+    private List<string> linkFlags = new List<string>();
+
+	private bool selecting;
+
+    private Func<int> syncNumberOfLinkTimes;
     
     #endregion
 
@@ -87,6 +85,17 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 		}
 	}
 
+    public void InitLinkTimesSyncCall(Func<int> syncNumberOfLinkTimes)
+    {
+        this.syncNumberOfLinkTimes = syncNumberOfLinkTimes;
+    }
+
+    private void RejectRepeatLink(bool rejectRepeatLink)
+    {
+        this.rejectRepeatLink = rejectRepeatLink;
+    }
+
+
 	private void OnMapChanged (object sender, System.EventArgs e)
 	{
 		// TODO: 地圖改變，修改 Sensor	
@@ -94,16 +103,7 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
     private void Start()
     {
-        InitLinkers();
         InitSensors();
-    }
-
-    private void InitLinkers()
-    {
-        foreach (var linker in imageLinkers)
-            linkers.Add(linker.name, linker);
-
-        imageLinkers = null;
     }
     
     private void InitSensors()
@@ -113,8 +113,6 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 			var g = s.Transform.GetComponent<MaskableGraphic> ();
 			TableSlotDragSensor.Init (g, this, id++);
 		}
-
-        sensors = null;
     }
 
     public void RegisterSensor(int sensorID)
@@ -130,8 +128,6 @@ public class MapInput : MonoBehaviour, IDragSensorManager
             end = -1;
 
         start = sensorID;
-
-        
 
         RegisterSensorHook();
 
@@ -156,25 +152,19 @@ public class MapInput : MonoBehaviour, IDragSensorManager
         if(!IsNeighbor(sensorID))
             return;
 
-        end = sensorID;
+        var flag = string.Format("{0}-{1}", Mathf.Min(start, sensorID), Mathf.Max(start, sensorID));
+        if(rejectRepeatLink && linkFlags.Contains(flag))
+            return;
 
-        var match = string.Format("{0}-{1}", Mathf.Min(start, end), Mathf.Max(start, end));
-        EnableLinker(match, true);
+        linkFlags.Add(flag);
+
+        end = sensorID;
 
         start = end;
 
         busTargets.Add(end);
 
         OverlapSensorHook();
-    }
-
-    private void EnableLinker(string index, bool enable)
-    {
-		if (linkers.ContainsKey(index))
-		{
-        	var img = linkers[index];
-        	img.color = enable? new Color32(150, 150, 150, 255) : new Color32(150, 150, 150, 50);
-		}
     }
 
     bool IsNeighbor(int id)
@@ -199,6 +189,9 @@ public class MapInput : MonoBehaviour, IDragSensorManager
     public void RemoveSensor(int sensorID)
     {
         if(!this.enabled)
+            return;
+
+        if(start == -1)
             return;
   
 		this.InvokeEndEvent ();
@@ -252,23 +245,24 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
     protected virtual void RegisterSensorHook()
     { 
-         busTargets.Add(start);
+        numberOfLinkTimes = syncNumberOfLinkTimes();
+        
+        busTargets.Add(start);
     }
 
-    protected virtual void OverlapSensorHook() { }
+    protected virtual void OverlapSensorHook()
+     { 
+        if(--numberOfLinkTimes == 0)
+            RemoveSensor(end);
+     }
 
     protected virtual void SplitSensorHook() { }
 
     protected virtual void RemoveSensorHook()
     {
+        linkFlags.Clear();
         busTargets.Clear();
-
-        foreach (var linker in linkers)
-            EnableLinker(linker.Key, false);
-
-		// 
     }
-
   
     #endregion
     

@@ -965,13 +965,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915f09d08f5a24253a14311e2672ec55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  marks: []
-  imageLinkers: []
-  sensors: []
-  numberOfMatches: 0
+  rejectRepeatLink: 1
+  numberOfLinkTimes: 0
   start: -1
   end: -1
   busTargets: 
+  linkFlags: []
 --- !u!1 &489916089
 GameObject:
   m_ObjectHideFlags: 0
