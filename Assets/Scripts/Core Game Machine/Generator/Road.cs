@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Road : IRoad {
 
+	float totalDistance;
+
 	public Road(Vector3 p1, Vector3 p2) : this(new Vector3[]{p1, p2}){
 		
 	}
@@ -26,6 +28,8 @@ public class Road : IRoad {
 		for (var i = 0; i < this.distance.Length; i++) {
 			this.distance [i] = Mathf.InverseLerp (0, totalDistance, this.distance [i]);
 		}
+
+		this.totalDistance = totalDistance;
 	}
 
 	public Vector3 GetPosition(float t)
@@ -43,6 +47,10 @@ public class Road : IRoad {
 			}
 		}
 		return this.points[this.points.Length - 1];
+	}
+
+	public float GetTotalDistance(){
+		return this.totalDistance;
 	}
 
 	Vector3[] points;
