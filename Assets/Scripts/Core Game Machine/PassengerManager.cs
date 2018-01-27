@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class PassengerManager : IPassengerManager {
 
-    private List<IPassenger> _passengers;
+    private List<IPassenger> _passengers; 
 
     public PassengerManager() {
         _passengers = new List<IPassenger>();

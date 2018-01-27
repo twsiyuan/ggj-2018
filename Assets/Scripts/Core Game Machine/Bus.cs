@@ -7,6 +7,7 @@ public class Bus : IBus {
 
     private int _distance;
     private int _capacity;
+    public int Distance { get { return _distance; } }
 
     private IStation _start;
     private IStation _goal;
