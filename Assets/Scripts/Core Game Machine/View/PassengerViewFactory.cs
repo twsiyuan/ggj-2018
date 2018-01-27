@@ -2,11 +2,14 @@
 using UnityEngine;
 
 [Serializable]
-public class PassengerViewFactory : IPassengerViewFactory
+public class PassengerViewFactory : MonoBehaviour
 {
-    public IPassengerView MakePassengerView() {
-         
-        GameObject prefab = UnityEngine.Object.Instantiate(Resources.Load("Prefabs/Passenger1") as GameObject);
-        return new PassengerView(prefab);
+    [SerializeField]
+	PassengerSettings settings = null;
+
+    public IPassengerView MakePassengerView() 
+	{
+		GameObject prefab = UnityEngine.Object.Instantiate(this.settings.GetPrefabRandom());
+		return new PassengerView(prefab);
     }
 }

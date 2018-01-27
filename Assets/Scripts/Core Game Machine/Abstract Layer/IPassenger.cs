@@ -6,9 +6,9 @@
 
     void AboardBus(IBus bus); 
 
-    void PassThroughNextStation(IStation station, IBus bus);
+    bool PassThroughNextStation(IStation station, IBus bus);
 
-    void GetOffFromBusAndArriveStation(IStation station);
+    bool GetOffFromBusAndArriveStation(IStation station);
 
     void UpdateRage();
 }
