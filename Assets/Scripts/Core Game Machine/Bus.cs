@@ -11,7 +11,9 @@ public class Bus : IBus {
 
     private IStation _start;
     private IStation _goal;
+    private IStation _current;
     private List<IStation> _path;
+    public List<IStation> BusPath { get { return _path; } }
 
     private List<IPassenger> _passengers;
 
@@ -29,6 +31,7 @@ public class Bus : IBus {
         _path = path;
         _start = path[0];
         _goal = path[path.Count - 1];
+         
     }
 
     public void PassThroughStation(IStation station) {

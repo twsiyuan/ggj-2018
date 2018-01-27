@@ -4,21 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 
 public partial class GameController : MonoBehaviour
-{
-	//private IAnimateManager _animateMgr;
-
+{ 
 	private IPassengerManager _passengerMgr;
 	private IPassengerGenerator _passengerGenerator;
-	/*
-	 void Initial(ISensorListener sensor, IAnimateManager animate) {
-		_sensorListener = sensor;
-		_animateMgr = animate;
 
-		_passengerMgr = new PassengerManager();
-		_passengerGenerator = new PassengerGenerator();
-	}*/
-
-	 IEnumerator MainLoop() {
+    IEnumerator MainLoop() {
 		while (true) {
 
 			if (this.stationsBuffer.Count <= 0) {
@@ -31,6 +21,7 @@ public partial class GameController : MonoBehaviour
 			Debug.Log("Listener get the result : "+ string.Join(",", stations.Select(v => v.Index.ToString()).ToArray()));
 
 			IBus bus = new Bus(0, 0);
+            bus.StartBusPath(new List<IStation>(stations));
 			_animateMgr.PlayBusAnimate(bus);
 		}
 	}
