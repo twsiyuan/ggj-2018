@@ -12,7 +12,7 @@ public class UnitTest
         IStation s1 = new Station();
         IStation s2 = new Station();
         IStation s3 = new Station(); 
-        IPassenger p = new Passenger(s1, s2, null);
+        IPassenger p = new Passenger(s1, s2, null, null);
         
         Assert.AreEqual(true, p.IsWaiting);
 
@@ -41,7 +41,7 @@ public class UnitTest
         IStation s2 = new Station();
         IStation s3 = new Station();
         IStation s4 = new Station();
-        IPassenger p = new Passenger(s1, s4, null);
+        IPassenger p = new Passenger(s1, s4, null, null);
         
         Assert.AreEqual(true, p.IsWaiting);
 
@@ -71,10 +71,10 @@ public class UnitTest
         IStation s1 = new Station();
         IStation s2 = new Station();
         IStation s3 = new Station();
-        IPassenger p1 = new Passenger(s1, s3, null);
-        IPassenger p2 = new Passenger(s1, s3, null);
-        IPassenger p3 = new Passenger(s2, s3, null);
-        IPassenger p4 = new Passenger(s2, s3, null);
+        IPassenger p1 = new Passenger(s1, s3, null, null);
+        IPassenger p2 = new Passenger(s1, s3, null, null);
+        IPassenger p3 = new Passenger(s2, s3, null, null);
+        IPassenger p4 = new Passenger(s2, s3, null, null);
 
         Assert.AreEqual(true, p1.IsWaiting);
         Assert.AreEqual(true, p2.IsWaiting);
@@ -118,10 +118,10 @@ public class UnitTest
         IStation s2 = new Station();
         IStation s3 = new Station();
         IStation s4 = new Station();
-        IPassenger p1 = new Passenger(s1, s3, null);
-        IPassenger p2 = new Passenger(s1, s4, null);
-        IPassenger p3 = new Passenger(s2, s3, null);
-        IPassenger p4 = new Passenger(s2, s3, null);
+        IPassenger p1 = new Passenger(s1, s3, null, null);
+        IPassenger p2 = new Passenger(s1, s4, null, null);
+        IPassenger p3 = new Passenger(s2, s3, null, null);
+        IPassenger p4 = new Passenger(s2, s3, null, null);
 
         Assert.AreEqual(true, p1.IsWaiting);
         Assert.AreEqual(true, p2.IsWaiting);
