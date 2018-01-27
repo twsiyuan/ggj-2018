@@ -39,9 +39,10 @@ public class Station : IStation
 		return this.Map.IsNeighbor(this, station);
 	}
 
-    public void NewPassenger(IPassenger passenger)
+    public int NewPassenger(IPassenger passenger)
     {
         passengers.Add(passenger);
+        return passengers.Count;
     }
 
 	public void PickupPassengers(int seats, List<IPassenger> output)

@@ -22,13 +22,15 @@ public class Passenger : IPassenger {
 
     private IStation _start;
     private IStation _goal;
+    private IPassengerView _view;
 
-    public Passenger(IStation start, IStation goal) {
+    public Passenger(IStation start, IStation goal, IPassengerView view) {
         _start = start;
         _goal = goal;
-        _rage = 0; 
+        _rage = 0;
+        _view = view;
 
-        WaitingAtStation(start);
+        _waitingAtStation(start);
     }
 
     public void AboardBus(IBus bus) {
@@ -60,13 +62,17 @@ public class Passenger : IPassenger {
         }
     }
 
-    public void WaitingAtStation(IStation station) {
-        station.NewPassenger(this);
+    private void _waitingAtStation(IStation station) {
+        int order = station.NewPassenger(this);
         _status = PassengerStatus.Waiting;
+
+        if (_view != null) {
+            _view.ShowViewPositionAtStation(station.Transform, order);
+        }
     }
 
     private void _remainWaitingAtStation(IStation station) {
-        WaitingAtStation(station);
+        _waitingAtStation(station);
         _addGetOffWrongStationRage();
     }
 

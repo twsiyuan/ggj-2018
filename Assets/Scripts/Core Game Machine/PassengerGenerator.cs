@@ -11,17 +11,18 @@ public class PassengerGenerator : IPassengerGenerator
 
     private IMap _map;
     private IPassengerManager _passengerMgr;
+    private IPassengerViewFactory _passengerViewFactory;
 
-    public PassengerGenerator() {
+    public PassengerGenerator(IMap map, IPassengerManager passengerMgr) {
+        _map = map;
+        _passengerMgr = passengerMgr;
+
+        _passengerViewFactory = new PassengerViewFactory();
+
         _rand = new System.Random();
         _waitInterval = 5;
         _resetTimer();
-    }
-
-    public void Initialize(IMap map, IPassengerManager passengerMgr) {
-        _map = map;
-        _passengerMgr = passengerMgr;
-    }
+    } 
 
     public void UpdateTimer() {
         _timer -= Time.deltaTime;
@@ -41,7 +42,9 @@ public class PassengerGenerator : IPassengerGenerator
         int goalIdx = _rand.Next(stations.Count);
         IStation goal = stations[goalIdx];
 
-        _passengerMgr.AddPassenger( new Passenger(start, goal) );
+        Debug.Log("passenger at " + startIdx + " goto "+ goalIdx);
+        IPassengerView passengerView = _passengerViewFactory.MakePassengerView();
+        _passengerMgr.AddPassenger( new Passenger(start, goal, passengerView) );
     }
 
     private void _resetTimer() {
