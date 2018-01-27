@@ -14,11 +14,11 @@ public class Passenger : IPassenger {
     public bool IsMoving { get { return _status == PassengerStatus.Moving; } }
     public bool IsArrived { get { return _status == PassengerStatus.Arrived; } }
 
-    private readonly int _rageMax;
+    private readonly int _rageMax = 1000;
     private int _rage;
-    private readonly int _waitingRage;
-    private readonly int _movingRage;
-    private readonly int _wrongStationRage;
+    private readonly int _waitingRage = 1;
+    private readonly int _movingRage = 0;
+    private readonly int _wrongStationRage = 2;
 
     private IStation _start;
     private IStation _goal;
@@ -60,6 +60,10 @@ public class Passenger : IPassenger {
         else if (_status == PassengerStatus.Moving) {
             _addMovingRage();
         }
+
+        if (_rage > _rageMax) {
+            _fail();
+        }
     }
 
     private void _waitingAtStation(IStation station) {
@@ -78,6 +82,10 @@ public class Passenger : IPassenger {
 
     private void _success() {
         _status = PassengerStatus.Arrived;
+    }
+
+    private void _fail() {
+        Debug.Log("passenger ANGRY!");
     }
 
     private void _addWaitingRage() {

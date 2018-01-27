@@ -27,15 +27,6 @@ public class MapInput : MonoBehaviour, IDragSensorManager
     #region [ Fields / Properties - Sensor]
 
 	Map map;
-    
-    [SerializeField]
-    private CanvasGroup canvasGroup;
-
-    [SerializeField]
-    private int start = -1;
-
-    [SerializeField]
-    private int end = -1;
 
     [SerializeField]
     private Image[] marks;
@@ -46,35 +37,44 @@ public class MapInput : MonoBehaviour, IDragSensorManager
     [SerializeField]
     private EmptyGraphic[] sensors;
 
-    [SerializeField]
-    private List<int> busTargets = new List<int>();
-
     private Dictionary<string, Image> linkers = new Dictionary<string, Image>();
 
     private Vector2 pressPos;
+
+    [SerializeField]
+    private bool allowSensorInput;
+
+    [SerializeField]
+    private int start = -1;
+
+    [SerializeField]
+    private int end = -1;
+
+    [SerializeField]
+    private List<int> busTargets = new List<int>();
     
     #endregion
 
 
     #region [ Sensors ]
     
-	void Awake(){
+	private void Awake(){
 		map = GetComponent<Map>();
 		map.MapChanged += this.OnMapChanged;
 	}
 
-	void OnDestroy(){
+	private void OnDestroy(){
 		if (map != null) {
 			map.MapChanged -= this.OnMapChanged;
 		}
 	}
 
-	void OnMapChanged (object sender, System.EventArgs e)
+	private void OnMapChanged (object sender, System.EventArgs e)
 	{
 		// TODO: 地圖改變，修改 Sensor	
 	}
 
-    void Start()
+    private void Start()
     {
         InitLinkers();
         InitSensors();
@@ -99,8 +99,16 @@ public class MapInput : MonoBehaviour, IDragSensorManager
         sensors = null;
     }
 
+    public void EnableSensorInput(bool enable)
+    {
+        allowSensorInput = enable;
+    }
+
     public void RegisterSensor(int sensorID)
     {
+        if(!allowSensorInput)
+            return;
+
         var station = map.GetStation(sensorID);
         if(!station.IsMainStation)
             return;
@@ -114,7 +122,10 @@ public class MapInput : MonoBehaviour, IDragSensorManager
     }
 
     public void OverlapSensor(int sensorID)
-    {
+    {   
+        if(!allowSensorInput)
+            return;
+
         if(start == -1)
             return;
 
@@ -149,7 +160,10 @@ public class MapInput : MonoBehaviour, IDragSensorManager
     }
 
     public void SplitSensor(int sensorID)
-    {
+    {   
+        if(!allowSensorInput)
+            return;
+
         if(end == -1)
             return;
 
@@ -160,6 +174,9 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
     public void RemoveSensor(int sensorID)
     {
+        if(!allowSensorInput)
+            return;
+
         RemoveSensorHook();
 
         start = -1;
@@ -180,16 +197,26 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 		}
     }
 
-    protected virtual void OverlapSensorHook()
-    {
-
-    }
+    protected virtual void OverlapSensorHook() { }
 
     protected virtual void SplitSensorHook() { }
 
     protected virtual void RemoveSensorHook()
     {
-		if (this.SelectEnded != null) {
+        SendStationPaths();
+
+        busTargets.Clear();
+
+        foreach (var linker in linkers)
+            EnableLinker(linker.Key, false);
+    }
+
+    private void SendStationPaths()
+    {
+        if(busTargets.Count <= 1)
+            return;
+
+        if (this.SelectEnded != null) {
 			this.SelectEnded (this, new SelectEndEventArgs(){
 				Stations = busTargets.Select(v => map.GetStation(v)).ToArray(),
 			});
@@ -198,11 +225,6 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 		#if UNITY_EDITOR
 		Debug.LogFormat ("Selected Bus: {0}", string.Join(", ", this.busTargets.Select(v => v.ToString()).ToArray()));
 		#endif
-
-        busTargets.Clear();
-
-        foreach (var linker in linkers)
-            EnableLinker(linker.Key, false);
     }
     
     #endregion
