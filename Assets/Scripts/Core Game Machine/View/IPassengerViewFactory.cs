@@ -1,4 +1,6 @@
-﻿public interface IPassengerViewFactory
-{	
-	
+﻿using UnityEngine;
+
+public interface IPassengerViewFactory
+{
+    IPassengerView MakePassengerView();
 }

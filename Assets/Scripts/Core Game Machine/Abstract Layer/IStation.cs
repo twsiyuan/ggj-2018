@@ -18,6 +18,12 @@ public interface IStation
 		get;
 	}
 
+	/// <summary>
+	/// 取得前往鄰近車站的道路 (null) 表示非鄰近
+	/// </summary>
+	IRoad GetRoad (IStation station);
+
+
     /// <summary>
     /// 車站的索引
     /// </summary>
@@ -41,7 +47,7 @@ public interface IStation
     /// <summary>
     /// 由系統生成乘客
     /// </summary>
-    void NewPassenger(IPassenger passenger);
+    int NewPassenger(IPassenger passenger);
 
     /// <summary>
     /// 依據給定的 seats 數量，回傳可以上車的乘客數量

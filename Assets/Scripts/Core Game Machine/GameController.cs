@@ -12,7 +12,10 @@ public partial class GameController : MonoBehaviour
 	[SerializeField]
 	private Map map;
 
-	Queue<IStation[]> stationsBuffer = new Queue<IStation[]>();
+    private IPassengerManager _passengerMgr;
+    private IPassengerGenerator _passengerGenerator;
+
+    Queue<IStation[]> stationsBuffer = new Queue<IStation[]>();
 
 	void Reset(){
 		this.map = this.GetComponentInChildren<Map> ();
@@ -35,6 +38,9 @@ public partial class GameController : MonoBehaviour
 	}
 
     void Start() {
+        _passengerMgr = new PassengerManager();
+        _passengerGenerator = new PassengerGenerator(map, _passengerMgr); 
+
         StartCoroutine(this.MainLoop());
     }
 }

@@ -5,9 +5,6 @@ using System.Linq;
 
 public partial class GameController : MonoBehaviour
 { 
-	private IPassengerManager _passengerMgr;
-	private IPassengerGenerator _passengerGenerator;
-
     IEnumerator MainLoop() {
 		while (true) {
 

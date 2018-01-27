@@ -20,6 +20,11 @@ public class Map : MonoBehaviour, IMap
 			set;
 		}
 
+		public IRoad Road {
+			get;
+			set;
+		}
+
 		public bool IsLinked(IStation v1, IStation v2){
 			return (this.V1 == v1 && this.V2 == v2) ||
 				(this.V1 == v2 && this.V2 == v1);
@@ -78,8 +83,8 @@ public class Map : MonoBehaviour, IMap
 	{
 		return stations.IndexOf (station);
 	}
-
-	public void AddLink (IStation stationA, IStation stationB){
+		
+	public void AddLink (IStation stationA, IStation stationB, IRoad road){
 		if (stationA == null || stationB == null) {
 			throw new System.ArgumentNullException ();
 		}
@@ -87,17 +92,38 @@ public class Map : MonoBehaviour, IMap
 		this.links.Add (new Link () {
 			V1 = stationA,
 			V2 = stationB,
+			Road = road,
 		});
 
 		this.OnEdited ();
 	}
 
-	public void AddLink (int indexA, int indexB){
-		this.AddLink (GetStation(indexA), GetStation(indexB));
+	public void AddLink (int indexA, int indexB, IRoad road){
+		this.AddLink (GetStation(indexA), GetStation(indexB), road);
 	}
 		
 	public bool IsNeighbor(int indexA, int indexB){
 		return this.IsNeighbor (GetStation(indexA), GetStation(indexB));
+	}
+
+	public IRoad GetRoad (IStation stationA, IStation stationB)
+	{
+		if (stationA == null || stationB == null) {
+			return null;
+		}
+
+		foreach (var l in this.links) {
+			if (l.IsLinked (stationA, stationB)) {
+
+				if (l.V1 == stationA) {
+					return l.Road;
+				} else {
+					return new ReverseRoad (l.Road);
+				}
+			}
+		}
+
+		return null;
 	}
 		
 	public bool IsNeighbor(IStation stationA, IStation stationB){

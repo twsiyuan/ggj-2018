@@ -30,6 +30,10 @@ public class Station : IStation
 		
 	private List<IPassenger> passengers = new List<IPassenger>();
 
+	public IRoad GetRoad (IStation station){
+		return this.Map.GetRoad (this, station);
+	}
+
 	public bool IsNeighbor(int index)
     {
 		return this.Map.IsNeighbor (this.Index, index);
@@ -39,9 +43,10 @@ public class Station : IStation
 		return this.Map.IsNeighbor(this, station);
 	}
 
-    public void NewPassenger(IPassenger passenger)
+    public int NewPassenger(IPassenger passenger)
     {
         passengers.Add(passenger);
+        return passengers.Count;
     }
 
 	public void PickupPassengers(int seats, List<IPassenger> output)

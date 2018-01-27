@@ -2,9 +2,7 @@
 {
     bool IsWaiting { get; }
     bool IsMoving { get; }
-    bool IsArrived { get; }
-
-    void WaitingAtStation(IStation station);
+    bool IsArrived { get; } 
 
     void AboardBus(IBus bus); 
 
