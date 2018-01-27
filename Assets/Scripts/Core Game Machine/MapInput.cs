@@ -1,10 +1,29 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Map))]
 public class MapInput : MonoBehaviour, IDragSensorManager
 {	
+	public class SelectStartEventArgs : System.EventArgs{
+		public IStation Station {
+			get;
+			set;
+		}
+	}
+
+	public class SelectEndEventArgs : System.EventArgs{
+		public IStation[] Stations {
+			get;
+			set;
+		}
+	}
+
+	public event System.EventHandler SelectStarted;
+
+	public event System.EventHandler SelectEnded;
+
     #region [ Fields / Properties - Sensor]
 
 	Map map;
@@ -108,8 +127,11 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
     private void EnableLinker(string index, bool enable)
     {
-        var img = linkers[index];
-        img.color = enable? new Color32(150, 150, 150, 255) : new Color32(150, 150, 150, 50);
+		if (linkers.ContainsKey(index))
+		{
+        	var img = linkers[index];
+        	img.color = enable? new Color32(150, 150, 150, 255) : new Color32(150, 150, 150, 50);
+		}
     }
 
     bool IsNeighbor(int id)
@@ -142,6 +164,12 @@ public class MapInput : MonoBehaviour, IDragSensorManager
     protected virtual void RegisterSensorHook()
     { 
          busTargets.Add(start);
+
+		if (this.SelectStarted != null) {
+			this.SelectStarted (this, new SelectStartEventArgs(){
+				Station = map.GetStation(start),
+			});
+		}
     }
 
     protected virtual void OverlapSensorHook()
@@ -153,6 +181,16 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
     protected virtual void RemoveSensorHook()
     {
+		if (this.SelectEnded != null) {
+			this.SelectEnded (this, new SelectEndEventArgs(){
+				Stations = busTargets.Select(v => map.GetStation(v)).ToArray(),
+			});
+		}
+
+		#if UNITY_EDITOR
+		Debug.LogFormat ("Selected Bus: {0}", string.Join(", ", this.busTargets.Select(v => v.ToString()).ToArray()));
+		#endif
+
         busTargets.Clear();
 
         foreach (var linker in linkers)
