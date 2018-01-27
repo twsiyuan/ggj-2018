@@ -7,7 +7,7 @@ public class BusCenter : MonoBehaviour
 
     [SerializeField]
     private int busMax;
-    
+
     Queue<IBus> depot = new Queue<IBus>();
 
     Action<bool> enableSensorInput;
@@ -39,7 +39,7 @@ public class BusCenter : MonoBehaviour
 
         bus.StartBusPath(paths);
 
-        updateDepotUI(GetBusState());
+        // updateDepotUI(GetBusState());
 
         if(depot.Count == 0)
             enableSensorInput(false);
@@ -51,7 +51,7 @@ public class BusCenter : MonoBehaviour
     {
         depot.Enqueue(bus);
 
-        updateDepotUI(GetBusState());
+        // updateDepotUI(GetBusState());
 
         if(depot.Count == 1)
             enableSensorInput(true);
