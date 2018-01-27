@@ -57,7 +57,9 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
     private Vector2 pressPos;
 
-
+    [SerializeField]
+    private int numberOfMatches;
+    
     [SerializeField]
     private int start = -1;
 
@@ -67,7 +69,7 @@ public class MapInput : MonoBehaviour, IDragSensorManager
     [SerializeField]
     private List<int> busTargets = new List<int>();
 
-	bool selecting = false;
+	private bool selecting = false;
     
     #endregion
 
@@ -128,6 +130,8 @@ public class MapInput : MonoBehaviour, IDragSensorManager
             end = -1;
 
         start = sensorID;
+
+        
 
         RegisterSensorHook();
 
