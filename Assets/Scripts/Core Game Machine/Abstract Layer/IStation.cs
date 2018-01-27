@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine;
 public interface IStation
 {	
 	/// <summary>
@@ -6,6 +8,13 @@ public interface IStation
 	/// </summary>
 	/// <value>The map.</value>
 	IMap Map {
+		get;
+	}
+
+	/// <summary>
+	/// 主要 Transform
+	/// </summary>
+	Transform Transform {
 		get;
 	}
 

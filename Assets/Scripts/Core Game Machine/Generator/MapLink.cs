@@ -27,7 +27,7 @@ public class MapLink : MonoBehaviour
 	public bool IsValid
 	{
 		get{
-			return this.StartStation != null && this.EndStation != null && this.StartStation == this.EndStation;
+			return this.StartStation != null && this.EndStation != null && this.StartStation != this.EndStation;
 		}
 	}
 
@@ -44,5 +44,9 @@ public class MapLink : MonoBehaviour
 		Gizmos.color = Color.green;
 		Gizmos.DrawLine(p1, p2);
 	
+	}
+
+	void Reset(){
+		this.startStation = this.GetComponent<MapStation> ();
 	}
 }

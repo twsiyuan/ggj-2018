@@ -2,65 +2,38 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Map : MonoBehaviour, IMap, IDragSensorManager
+public class Map : MonoBehaviour, IMap
 {	
+	List<IStation> stations = new List<IStation>();
 
-    #region [ Fields / Properties - Stations]
-
-    [SerializeField]
-    private List<IStation> stations;
-
-    [SerializeField]
-    private List<Station> hidingStations;
-    
-    #endregion
-
-
-    #region [ Fields / Properties - Sensor]
-    
-    [SerializeField]
-    private CanvasGroup canvasGroup;
-
-    [SerializeField]
-    private IMap map;
-
-    [SerializeField]
-    private int start = -1;
-
-    [SerializeField]
-    private int end = -1;
-
-    [SerializeField]
-    private Image[] marks;
-
-    [SerializeField]
-    private Image[] imageLinkers;
-
-    [SerializeField]
-    private EmptyGraphic[] sensors;
-
-    [SerializeField]
-    private List<int> busTargets = new List<int>();
-
-    private Dictionary<string, Image> linkers = new Dictionary<string, Image>();
-
-    private Vector2 pressPos;
-    
-    #endregion
-
-
-    #region [ Stations ]
 	// One-way link
-	Dictionary<IStation, IStation> links = new Dictionary<IStation, IStation>();
-    
-    public bool HasHidingStation()
-    {
-        return hidingStations.Count > 0; 
-    }
-    
+	struct Link{
+		public IStation V1 {
+			get;
+			set;
+		}
+
+		public IStation V2 {
+			get;
+			set;
+		}
+
+		public bool IsLinked(IStation v1, IStation v2){
+			return (this.V1 == v1 && this.V2 == v2) ||
+				(this.V1 == v2 && this.V2 == v1);
+		}
+	}
+
+	List<Link> links = new List<Link>();
+ 
 	public int AddStation(IStation station)
     {
         stations.Add(station);
+
+		if (station is Station) {
+			(station as Station).Map = this;
+		}
+
 		return stations.Count - 1;
     }
 
@@ -79,8 +52,10 @@ public class Map : MonoBehaviour, IMap, IDragSensorManager
 			throw new System.ArgumentNullException ();
 		}
 
-		this.links.Add (stationA, stationB);
-		this.links.Add (stationB, stationA);
+		this.links.Add (new Link () {
+			V1 = stationA,
+			V2 = stationB,
+		});
 	}
 
 	public void AddLink (int indexA, int indexB){
@@ -92,15 +67,8 @@ public class Map : MonoBehaviour, IMap, IDragSensorManager
 	}
 		
 	public bool IsNeighbor(IStation stationA, IStation stationB){
-		IStation temp;
-		if (this.links.TryGetValue (stationA, out temp)) {
-			if (stationB == temp) {
-				return true;
-			}
-		}
-
-		if (this.links.TryGetValue (stationB, out temp)) {
-			if (stationA == temp) {
+		foreach (var l in this.links) {
+			if (l.IsLinked (stationA, stationB)) {
 				return true;
 			}
 		}
@@ -121,130 +89,5 @@ public class Map : MonoBehaviour, IMap, IDragSensorManager
         foreach (var s in stations)
             output.Add(s);
     }
-    
-    #endregion
-
-
-    #region [ Sensors ]
-    
-    protected virtual void Awake()
-    {
-        InitTable();
-
-        InitLinkers();
-
-        InitSensors();
-    }
-
-    private void InitTable()
-    {
-        map = GetComponent<IMap>();
-    }
-
-    private void InitLinkers()
-    {
-        foreach (var linker in imageLinkers)
-            linkers.Add(linker.name, linker);
-
-        imageLinkers = null;
-    }
-    
-    private void InitSensors()
-    {
-        var id = 0;
-        foreach(var s in sensors)
-            TableSlotDragSensor.Init(s, this, id++);
-
-        sensors = null;
-    }
-
-    public void RegisterSensor(int sensorID)
-    {
-        var station = map.GetStation(sensorID);
-        if(!station.IsMainStation)
-            return;
-
-        if(start == end)
-            end = -1;
-
-        start = sensorID;
-
-        RegisterSensorHook();
-    }
-
-    public void OverlapSensor(int sensorID)
-    {
-        if(start == -1)
-            return;
-
-        if(!IsNeighbor(sensorID))
-            return;
-
-        end = sensorID;
-
-        var match = string.Format("{0}-{1}", Mathf.Min(start, end), Mathf.Max(start, end));
-        EnableLinker(match, true);
-
-        start = end;
-
-        busTargets.Add(end);
-
-        OverlapSensorHook();
-    }
-
-    private void EnableLinker(string index, bool enable)
-    {
-        var img = linkers[index];
-        img.color = enable? new Color32(150, 150, 150, 255) : new Color32(150, 150, 150, 50);
-    }
-
-    bool IsNeighbor(int id)
-    {
-        var station = map.GetStation(id);
-        return station.IsNeighbor(start);
-    }
-
-    public void SplitSensor(int sensorID)
-    {
-        if(end == -1)
-            return;
-
-        SplitSensorHook();
-
-        end = -1;
-    }
-
-    public void RemoveSensor(int sensorID)
-    {
-        RemoveSensorHook();
-
-        start = -1;
-
-        end = -1;
-    }
-
-    public virtual void DragSensor(Vector2 pos) { }
-
-    protected virtual void RegisterSensorHook()
-    { 
-         busTargets.Add(start);
-    }
-
-    protected virtual void OverlapSensorHook()
-    {
-
-    }
-
-    protected virtual void SplitSensorHook() { }
-
-    protected virtual void RemoveSensorHook()
-    {
-        busTargets.Clear();
-
-        foreach (var linker in linkers)
-            EnableLinker(linker.Key, false);
-    }
-    
-    #endregion
     
 }

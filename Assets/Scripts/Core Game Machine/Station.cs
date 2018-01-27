@@ -11,6 +11,11 @@ public class Station : IStation
 		internal set;
 	}
 
+	public Transform Transform {
+		get;
+		set;
+	}
+
 	public bool IsMainStation {
 		get;
 		set;
