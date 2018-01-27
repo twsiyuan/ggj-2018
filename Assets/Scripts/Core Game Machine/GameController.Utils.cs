@@ -19,6 +19,12 @@ public partial class GameController
 		return busCenter.GetNextBusDistance();
 	}
 
+	public void AddPassengerCompletion()
+	{
+		scoreBoard.AddPassengerCompletion();
+	}
+	
+
 	public void AddRage(int value)
 	{
 		scoreBoard.AddRage(value);
@@ -28,5 +34,12 @@ public partial class GameController
 	{
 		scoreBoard.AdjustRageMax(value);
 	}
+
+
+	private void functionName()
+	{
+	
+	}
+	
 
 }

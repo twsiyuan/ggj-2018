@@ -18,7 +18,7 @@ public class ScoreBoard : MonoBehaviour
     [SerializeField]
     private ScoreBoardView view = new ScoreBoardView();
 
-    public void AddCompletion()
+    public void AddPassengerCompletion()
     {
         completion++;
         view.UpdateScore(completion);
