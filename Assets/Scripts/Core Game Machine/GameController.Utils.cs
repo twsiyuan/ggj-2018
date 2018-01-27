@@ -21,26 +21,18 @@ public partial class GameController
 
 	public void AddPassengerCompletion()
 	{
-		scoreBoard.AddPassengerCompletion();
+		// scoreBoard.AddPassengerCompletion();
 	}
 	
 
 	public void AddRage(int value)
 	{
-        // TODO
-	    //	scoreBoard.AddRage(value);
+		// scoreBoard.AddRage(value);
 	}
 
 	public void AdjustRageMax(int value)
 	{
 		scoreBoard.AdjustRageMax(value);
 	}
-
-
-	private void functionName()
-	{
-	
-	}
-	
 
 }
