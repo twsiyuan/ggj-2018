@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class Map : MonoBehaviour, IMap
 {	
+	public event System.EventHandler MapChanged;
+
 	List<IStation> stations = new List<IStation>();
 
 	// One-way link
@@ -25,6 +27,35 @@ public class Map : MonoBehaviour, IMap
 	}
 
 	List<Link> links = new List<Link>();
+
+	bool editing = false;
+	bool dirty = false;
+
+	public void StartEditing(){
+		this.editing = true;
+	}
+
+	public void StopEditing(){
+		this.editing = false;
+		if (this.dirty) {
+			this.dirty = false;
+
+			if (this.MapChanged != null) {
+				this.MapChanged (this, System.EventArgs.Empty);
+			}
+		}
+	}
+
+	void OnEdited(){
+		if (this.editing) {
+			this.dirty = true;
+		} else {
+			this.dirty = false;
+			if (this.MapChanged != null) {
+				this.MapChanged (this, System.EventArgs.Empty);
+			}
+		}
+	}
  
 	public int AddStation(IStation station)
     {
@@ -34,6 +65,7 @@ public class Map : MonoBehaviour, IMap
 			(station as Station).Map = this;
 		}
 
+		this.OnEdited ();
 		return stations.Count - 1;
     }
 
@@ -56,6 +88,8 @@ public class Map : MonoBehaviour, IMap
 			V1 = stationA,
 			V2 = stationB,
 		});
+
+		this.OnEdited ();
 	}
 
 	public void AddLink (int indexA, int indexB){
