@@ -5,23 +5,53 @@ public interface IMap
 {	
 
     /// <summary>
-    /// 是否還有隱藏的車站
-    /// </summary>
-    bool HasHidingStation();
-
-    /// <summary>
     /// 新增車站
     /// </summary>
-    void AddStation();
+	int AddStation(IStation station);
 
     /// <summary>
     /// 依據代入的索引取得車站
     /// </summary>
     IStation GetStation(int index);
 
+	/// <summary>
+	/// 依據代入的索引取得車站
+	/// </summary>
+	int GetStationIndex(IStation station);
+
+	/// <summary>
+	/// 新增車站連結
+	/// </summary>
+	/// <param name="stationA">Station a.</param>
+	/// <param name="stationB">Station b.</param>
+	void AddLink (IStation stationA, IStation stationB);
+
+	/// <summary>
+	/// 新增車站連結
+	/// </summary>
+	/// <param name="stationA">Station a.</param>
+	/// <param name="stationB">Station b.</param>
+	void AddLink (int indexA, int indexB);
+
+
+	/// <summary>
+	/// 依據帶入的索引判斷車站是否彼此臨近
+	/// </summary>
+	bool IsNeighbor(int indexA, int indexB);
+
+	/// <summary>
+	/// 依據帶入判斷車站是否彼此臨近
+	/// </summary>
+	bool IsNeighbor(IStation stationA, IStation stationB);
+
     /// <summary>
     /// 取得所有車站
     /// </summary>
-    List<IStation> GetAllStations();
+	IEnumerable<IStation> GetAllStations();
+
+	/// <summary>
+	/// 取得所有車站
+	/// </summary>
+	void GetAllStations(List<IStation> output);
 
 }

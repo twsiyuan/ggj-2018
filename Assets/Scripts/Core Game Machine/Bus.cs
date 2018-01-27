@@ -53,7 +53,9 @@ public class Bus : IBus {
     }
 
     private void _stationPassengersAboardBus(IStation station) {
-        var waitingPassengers = station.GetPassengers(_capacity - _passengers.Count);
+		// TODO: Buffer
+		var waitingPassengers = new List<IPassenger> ();
+		station.PickupPassengers(_capacity - _passengers.Count, waitingPassengers);
         foreach (IPassenger passneger in waitingPassengers) {
             passneger.AboardBus(this);
             _passengers.Add(passneger);

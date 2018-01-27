@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameMachine_Prototype : MonoBehaviour, IDragSensorManager
+[RequireComponent(typeof(Map))]
+public class MapInput : MonoBehaviour, IDragSensorManager
 {	
-    
-    #region [ Fields / Properties ]
+    #region [ Fields / Properties - Sensor]
+
+	Map map;
     
     [SerializeField]
     private CanvasGroup canvasGroup;
-
-    [SerializeField]
-    private IMap map;
-
-    [SerializeField]
-    private Image[] imageLinkers;
 
     [SerializeField]
     private int start = -1;
@@ -26,6 +20,9 @@ public class GameMachine_Prototype : MonoBehaviour, IDragSensorManager
 
     [SerializeField]
     private Image[] marks;
+
+    [SerializeField]
+    private Image[] imageLinkers;
 
     [SerializeField]
     private EmptyGraphic[] sensors;
@@ -39,9 +36,11 @@ public class GameMachine_Prototype : MonoBehaviour, IDragSensorManager
     
     #endregion
 
-    protected virtual void Awake()
-    { 
 
+    #region [ Sensors ]
+    
+    void Start()
+    {
         InitTable();
 
         InitLinkers();
@@ -51,7 +50,7 @@ public class GameMachine_Prototype : MonoBehaviour, IDragSensorManager
 
     private void InitTable()
     {
-        map = GetComponent<IMap>();
+        map = GetComponent<Map>();
     }
 
     private void InitLinkers()
@@ -65,8 +64,10 @@ public class GameMachine_Prototype : MonoBehaviour, IDragSensorManager
     private void InitSensors()
     {
         var id = 0;
-        foreach(var s in sensors)
-            TableSlotDragSensor.Init(s, this, id++);
+		foreach (var s in this.map.GetAllStations()) {
+			var g = s.Transform.GetComponent<MaskableGraphic> ();
+			TableSlotDragSensor.Init (g, this, id++);
+		}
 
         sensors = null;
     }
@@ -152,29 +153,12 @@ public class GameMachine_Prototype : MonoBehaviour, IDragSensorManager
 
     protected virtual void RemoveSensorHook()
     {
-        SensorComplete.Invoke(busTargets);
         busTargets.Clear();
 
         foreach (var linker in linkers)
             EnableLinker(linker.Key, false);
-
-		if (this.Completed != null) {
-			this.Completed (this, new CompletedEventArgs(){
-				Stations = null,
-			});
-		}
     }
-
-    public Action<List<int>> SensorComplete;
-	public event System.EventHandler<CompletedEventArgs> Completed;
-
-	public class CompletedEventArgs : System.EventArgs
-	{
-		public List<IStation> Stations
-		{
-			get;
-			set;
-		}
-	}
+    
+    #endregion
+    
 }
-
