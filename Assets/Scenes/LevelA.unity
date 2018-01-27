@@ -1742,8 +1742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4751f6e4afdf424097faf99822656b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _passenger1: {fileID: 1799836374937732, guid: 4dfc5a4587e88b5409df6e7d6684589e,
-    type: 2}
+  settings: {fileID: 11400000, guid: bcdd6e08369fa46a38732009a0bb9d8e, type: 2}
 --- !u!114 &1730206743
 MonoBehaviour:
   m_ObjectHideFlags: 0
