@@ -1678,6 +1678,8 @@ GameObject:
   - component: {fileID: 1730206740}
   - component: {fileID: 1730206739}
   - component: {fileID: 1730206741}
+  - component: {fileID: 1730206743}
+  - component: {fileID: 1730206742}
   m_Layer: 0
   m_Name: LevelA
   m_TagString: Untagged
@@ -1699,6 +1701,7 @@ MonoBehaviour:
   _animateMgr: {fileID: 1730206741}
   mapInput: {fileID: 487359227}
   map: {fileID: 487359225}
+  passengerViewFactory: {fileID: 1730206742}
 --- !u!4 &1730206740
 Transform:
   m_ObjectHideFlags: 0
@@ -1727,6 +1730,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f87372ed7164a4943be78341e509ed88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _busViewFactory: {fileID: 1730206743}
+--- !u!114 &1730206742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1730206738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4751f6e4afdf424097faf99822656b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _passenger1: {fileID: 1799836374937732, guid: 4dfc5a4587e88b5409df6e7d6684589e,
+    type: 2}
+--- !u!114 &1730206743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1730206738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f4602a7c6ac8c41ada56709c465b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Bus: {fileID: 1694110322005340, guid: 10e093c9917c350498a918efec68e294, type: 2}
 --- !u!1 &1738886069
 GameObject:
   m_ObjectHideFlags: 0
