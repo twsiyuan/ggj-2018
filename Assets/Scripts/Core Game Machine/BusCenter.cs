@@ -18,14 +18,16 @@ public class BusCenter : MonoBehaviour
     /// <summary>
     /// 初始化會導致 Sensor 被呼叫，應該在 MainLoop 可以開始遊戲時再呼叫
     /// </summary>
-    public void Init(Action<bool> enableSensorInput, List<IBus> busQueue)
+    public void Init(Action<bool> enableSensorInput, Action<string> updateDepotUI, List<IBus> busQueue)
     {
         this.enableSensorInput = enableSensorInput;
+        
+        this.updateDepotUI = updateDepotUI;
+
+        busMax = busQueue.Count;
 
         foreach (var bus in busQueue)
             RecycleBus(bus);
-
-        busMax = busQueue.Count;
     }
 
     public int GetNextBusDistance()
@@ -39,7 +41,7 @@ public class BusCenter : MonoBehaviour
 
         bus.StartBusPath(paths);
 
-        // updateDepotUI(GetBusState());
+        updateDepotUI(GetBusState());
 
         if(depot.Count == 0)
             enableSensorInput(false);
@@ -51,7 +53,7 @@ public class BusCenter : MonoBehaviour
     {
         depot.Enqueue(bus);
 
-        // updateDepotUI(GetBusState());
+        updateDepotUI(GetBusState());
 
         if(depot.Count == 1)
             enableSensorInput(true);

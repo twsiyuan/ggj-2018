@@ -11,17 +11,45 @@ public class ScoreBoardView
     private Text score;
 
     [SerializeField]
+    private Text completion;
+    
+    [SerializeField]
+    private Text waiting;
+
+    [SerializeField]
     private Text depot;
 
-    public void UpdateScore(int value)
+    [SerializeField]
+    private Image rage;
+    
+    public void UpdateScore(int oldScore, int newScore)
     {
-        score.text = "累積乘客數: " + value.ToString();
+        
     }
     
+    public void UpdatePassengerCompletion(int value)
+    {
+        score.text = "累積乘載數: " + value.ToString();
+    }
+
+    public void UpdateWaitingPassenger(int value)
+    {
+        waiting.text = "等待乘客數:" + value.ToString();
+    }
 
     public void UpdateDepot(string value)
     {
-        depot.text = "車站數量: " + value;
+        depot.text = "派車數量: " + value;
+    }
+
+    public void UpdateRage(float value)
+    {
+        rage.fillAmount = value;
+    }
+
+    public void UpdateRageMax(int value)
+    {
+
     }
 
 }
