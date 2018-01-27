@@ -25,7 +25,7 @@ public interface IStation
 	bool IsNeighbor(int index);
 
 	/// <summary>
-	/// 依據帶入的索引判斷車站是否彼此臨近
+	/// 依據帶入判斷車站是否彼此臨近
 	/// </summary>
 	bool IsNeighbor(IStation station);
 
