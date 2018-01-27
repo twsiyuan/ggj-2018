@@ -4,6 +4,13 @@ using UnityEngine;
 public partial class GameController
 {	
 	
+	private void InitSubSystems()
+	{
+		InitBusCenter();
+
+		InitMapInput();
+	}
+	
     private void InitBusCenter()
 	{
 		var bus = new List<IBus>();
@@ -13,6 +20,10 @@ public partial class GameController
 		busCenter.Init((enabled)=> mapInput.enabled = enabled, bus);
 	}
 
+	private void InitMapInput()
+	{
+		mapInput.InitLinkTimesSyncCall(busCenter.GetNextBusDistance);
+	}
 
 	public int GetNextBusDistance()
 	{
@@ -23,7 +34,6 @@ public partial class GameController
 	{
 		// scoreBoard.AddPassengerCompletion();
 	}
-	
 
 	public void AddRage(int value)
 	{
