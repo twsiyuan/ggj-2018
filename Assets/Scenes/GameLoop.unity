@@ -538,26 +538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caff225837dfa4a9b80c72a787c4b16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stations:
-  - index: 0
-    mainStation: 1
-    neighbors: 0100000002000000
-  - index: 1
-    mainStation: 0
-    neighbors: 0000000003000000
-  - index: 2
-    mainStation: 0
-    neighbors: 00000000030000000400000005000000
-  - index: 3
-    mainStation: 1
-    neighbors: 0100000002000000
-  - index: 4
-    mainStation: 0
-    neighbors: 02000000
-  - index: 5
-    mainStation: 0
-    neighbors: 02000000
-  hidingStations: []
 --- !u!114 &713022020
 MonoBehaviour:
   m_ObjectHideFlags: 0
