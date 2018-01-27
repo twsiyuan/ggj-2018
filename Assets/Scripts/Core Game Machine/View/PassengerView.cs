@@ -41,6 +41,7 @@ public class PassengerView : IPassengerView
         pos.y -= _interval;
         _passengerPrefab.transform.position = pos;
         _passengerPrefab.SetActive(true);
+        _passengerPrefab.GetComponent<SpriteRenderer>().sortingOrder = 3;
         _passengerPrefab.GetComponent<SpriteRenderer>().DOFade(0.0f, _fadeDuration).Play().OnComplete(() => {
             _passengerPrefab.SetActive(false);
         });

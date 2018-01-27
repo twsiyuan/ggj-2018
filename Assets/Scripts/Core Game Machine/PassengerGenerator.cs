@@ -46,6 +46,6 @@ public class PassengerGenerator : IPassengerGenerator
     }
 
     private void _resetTimer() {
-        _timer = _rand.Next(_waitInterval);
+        _timer = Mathf.Max( 2f, _rand.Next(_waitInterval) );
     }
 }

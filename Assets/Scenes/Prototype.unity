@@ -423,6 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startStation: {fileID: 368876042}
   endStation: {fileID: 1038897059}
+  linkPoints: []
 --- !u!114 &368876041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,6 +437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startStation: {fileID: 368876042}
   endStation: {fileID: 1318571314}
+  linkPoints: []
 --- !u!114 &368876042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,6 +863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startStation: {fileID: 1038897059}
   endStation: {fileID: 170638847}
+  linkPoints: []
 --- !u!114 &1038897058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -874,6 +877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startStation: {fileID: 1038897059}
   endStation: {fileID: 676216791}
+  linkPoints: []
 --- !u!114 &1038897059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1303,6 +1307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startStation: {fileID: 1588643896}
   endStation: {fileID: 1038897059}
+  linkPoints: []
 --- !u!114 &1588643895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1316,6 +1321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startStation: {fileID: 1588643896}
   endStation: {fileID: 1318571314}
+  linkPoints: []
 --- !u!114 &1588643896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1582,6 +1588,7 @@ GameObject:
   - component: {fileID: 1730206741}
   - component: {fileID: 1730206743}
   - component: {fileID: 1730206742}
+  - component: {fileID: 1730206744}
   m_Layer: 0
   m_Name: GameLoop
   m_TagString: Untagged
@@ -1601,8 +1608,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animateMgr: {fileID: 1730206741}
-  mapInput: {fileID: 487359227}
+  busCenter: {fileID: 1730206744}
   map: {fileID: 487359225}
+  mapInput: {fileID: 487359227}
+  scoreBoard: {fileID: 0}
   passengerViewFactory: {fileID: 1730206742}
 --- !u!4 &1730206740
 Transform:
@@ -1640,8 +1649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4751f6e4afdf424097faf99822656b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _passenger1: {fileID: 1799836374937732, guid: 4dfc5a4587e88b5409df6e7d6684589e,
-    type: 2}
+  settings: {fileID: 11400000, guid: e36851994ee0a4a17b0a39f109ca552a, type: 2}
 --- !u!114 &1730206743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1654,6 +1662,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Bus: {fileID: 1694110322005340, guid: 10e093c9917c350498a918efec68e294, type: 2}
+--- !u!114 &1730206744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1730206738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc1c62edc1b84cc9ae18b9a44f38ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  busMax: 0
 --- !u!1 &1893381881
 GameObject:
   m_ObjectHideFlags: 0
