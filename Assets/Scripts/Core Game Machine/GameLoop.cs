@@ -9,9 +9,15 @@ public class GameLoop : IGameLoop {
 
     private IAnimateManager _animateMgr;
 
+    private IPassengerManager _passengerMgr;
+    private IPassengerGenerator _passengerGenerator;
+
     public void Initial(ISensorListener sensor, IAnimateManager animate) {
         _sensorListener = sensor;
         _animateMgr = animate;
+
+        _passengerMgr = new PassengerManager();
+        _passengerGenerator = new PassengerGenerator();
     }
 
     public IEnumerator MainLoop() {
@@ -25,9 +31,13 @@ public class GameLoop : IGameLoop {
             _sensorListener.Result.ForEach((i)=> { log += i+ ", "; });
             Debug.Log("Listener get the result : "+ log);
 
-
-
-            _animateMgr.PlayBusAnimate();
+            IBus bus = new Bus(0, 0);
+            _animateMgr.PlayBusAnimate(bus);
         }
+    }
+
+    public void Update() {
+        _passengerMgr.UpdateTimer();
+        _passengerGenerator.UpdateTimer();
     }
 }

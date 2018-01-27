@@ -15,6 +15,7 @@ public class PassengerGenerator : IPassengerGenerator
     public PassengerGenerator() {
         _rand = new System.Random();
         _waitInterval = 5;
+        _resetTimer();
     }
 
     public void Initialize(IMap map, IPassengerManager passengerMgr) {
