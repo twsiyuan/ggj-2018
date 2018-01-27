@@ -11,7 +11,7 @@ public class BusView : IBusView
 
     public BusView(GameObject prefab) {
         _busPrefab = prefab;
-        _busPrefab.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        _busPrefab.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
     }
 
 	public IEnumerator InitAnimate(Vector3 position) {
@@ -22,6 +22,7 @@ public class BusView : IBusView
     }
 
 	public IEnumerator MoveToStationAnimate(IRoad road) {
+        _setLeftRightSpriteDircection(road.GetPosition(1).x - road.GetPosition(0).x);
         float duration = road.GetTotalDistance() * 0.3f;
 		var startTime = Time.time;
 		var endTime = startTime + duration;
@@ -32,5 +33,11 @@ public class BusView : IBusView
 		}
 		_busPrefab.transform.position = road.GetPosition (1); 
     }
-    
+
+    private void _setLeftRightSpriteDircection(float xDir) {
+        float yAngle = xDir > 0 ? 180f : 0f;
+        Quaternion angle = _busPrefab.transform.localRotation;
+        angle.eulerAngles = new Vector3(0f, yAngle, 0f);
+        _busPrefab.transform.localRotation = angle;
+    }
 }

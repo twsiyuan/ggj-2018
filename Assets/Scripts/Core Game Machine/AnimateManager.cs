@@ -43,7 +43,7 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
         List<IPassenger> arriveds = new List<IPassenger>();
         List<IPassenger> getOffs = new List<IPassenger>();
         List<IPassenger> aboards = new List<IPassenger>();
-        List<IPassenger> changedTypePassengers = bus.PassThroughStation(station);
+        List<IPassenger> changedTypePassengers = bus.PassThroughNextStation();
 
         changedTypePassengers.ForEach((p) => {
             if (p.IsArrived) { arriveds.Add(p); }
@@ -56,6 +56,8 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
         yield return _getOffAnimate(getOffs, station, waitingNumberBase);
 
         yield return _aboardAnimate(aboards, station);
+
+         _rearrangeLineAnimate(station);
     }
 
     private IEnumerator _arrivedAnimate(List<IPassenger> arriveds, IBusView busView) {
@@ -75,5 +77,9 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
         for (int i = 0; i < aboards.Count; i++) {
             yield return aboards[i].View.AboardBusAnimate(station.Transform);
         }
+    }
+
+    private void _rearrangeLineAnimate(IStation station) {
+        station.RearrangePassengersView();
     }
 }

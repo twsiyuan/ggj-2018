@@ -7,19 +7,29 @@ using DG.Tweening;
 public class PassengerView : IPassengerView
 {
     private GameObject _passengerPrefab;
+    private GameObject _facePrefab;
+
     private readonly float _interval = 0.5f;
     private readonly float _duration = 0.5f;
     private readonly float _fadeDuration = 1f;
 
-    public PassengerView(GameObject prefab) {
-        _passengerPrefab = prefab;
+    public PassengerView(GameObject passenger, GameObject face) {
+        _passengerPrefab = passenger;
         _passengerPrefab.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
+        _facePrefab = face;
+        _facePrefab.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
     }
 
     public void ShowViewPositionAtStation(Transform stationTransform, int order) {
         Vector3 pos = stationTransform.position;
         pos.x += order * _interval;
         _passengerPrefab.transform.position = pos;
+    }
+    public void RearrangePositionAnimateAtStation(Transform stationTransform, int order) {
+        Vector3 pos = stationTransform.position;
+        pos.x += order * _interval;
+        _passengerPrefab.transform.DOMoveX(pos.x, _duration).Play();
     }
 
     public IEnumerator AboardBusAnimate(Transform stationTransform) { 

@@ -10,6 +10,6 @@ public class PassengerViewFactory : MonoBehaviour
     public IPassengerView MakePassengerView() 
 	{
 		GameObject prefab = UnityEngine.Object.Instantiate(this.settings.GetPrefabRandom());
-		return new PassengerView(prefab);
+        return new PassengerView(prefab);
     }
 }

@@ -24,15 +24,15 @@ public class UnitTest
             s1, s2, s3
         };
         b.StartBusPath(path);
-        b.PassThroughStation(s1);
+        b.PassThroughNextStation();
 
         Assert.AreEqual(true, p.IsMoving);
 
-        b.PassThroughStation(s2);
+        b.PassThroughNextStation();
 
         Assert.AreEqual(true, p.IsArrived);
 
-        b.PassThroughStation(s3);
+        b.PassThroughNextStation();
     }
 
     [Test]
@@ -53,15 +53,15 @@ public class UnitTest
             s1, s2, s3
         };
         b.StartBusPath(path);
-        b.PassThroughStation(s1);
+        b.PassThroughNextStation();
 
         Assert.AreEqual(true, p.IsMoving);
 
-        b.PassThroughStation(s2);
+        b.PassThroughNextStation();
 
         Assert.AreEqual(true, p.IsMoving);
 
-        b.PassThroughStation(s3);
+        b.PassThroughNextStation();
 
         Assert.AreEqual(true, p.IsWaiting);
     }
@@ -89,21 +89,21 @@ public class UnitTest
             s1, s2, s3
         };
         b.StartBusPath(path);
-        b.PassThroughStation(s1);
+        b.PassThroughNextStation();
 
         Assert.AreEqual(true, p1.IsMoving);
         Assert.AreEqual(true, p2.IsMoving);
         Assert.AreEqual(true, p3.IsWaiting);
         Assert.AreEqual(true, p4.IsWaiting);
 
-        b.PassThroughStation(s2);
+        b.PassThroughNextStation();
 
         Assert.AreEqual(true, p1.IsMoving);
         Assert.AreEqual(true, p2.IsMoving);
         Assert.AreEqual(true, p3.IsMoving);
         Assert.AreEqual(true, p4.IsWaiting);
 
-        b.PassThroughStation(s3);
+        b.PassThroughNextStation();
 
         Assert.AreEqual(true, p1.IsArrived);
         Assert.AreEqual(true, p2.IsArrived);
@@ -136,18 +136,18 @@ public class UnitTest
             s1, s2, s3
         };
         b.StartBusPath(path);
-        List<IPassenger> pass1 = b.PassThroughStation(s1);
+        List<IPassenger> pass1 = b.PassThroughNextStation();
 
         Assert.AreEqual(2, pass1.Count);
         Assert.AreEqual(true, pass1[0].IsMoving);
         Assert.AreEqual(true, pass1[1].IsMoving);
 
-        List<IPassenger> pass2 = b.PassThroughStation(s2);
+        List<IPassenger> pass2 = b.PassThroughNextStation();
 
         Assert.AreEqual(1, pass2.Count);
         Assert.AreEqual(true, pass2[0].IsMoving);
 
-        List<IPassenger> pass3 = b.PassThroughStation(s3);
+        List<IPassenger> pass3 = b.PassThroughNextStation();
 
         Assert.AreEqual(3, pass3.Count);
         Assert.AreEqual(true, pass3[0].IsArrived);

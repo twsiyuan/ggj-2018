@@ -11,9 +11,9 @@ public class Bus : IBus {
 
     private IStation _start;
     private IStation _goal;
-    private IStation _current;
-    private List<IStation> _path;
-    public List<IStation> BusPath { get { return _path; } }
+    private Queue<IStation> _path;
+    public List<IStation> BusPath { get { return new List<IStation>(_path); } }
+    public bool HasNextStationOnPath { get { return _path.Count != 0; } }
 
     private List<IPassenger> _passengers;
 
@@ -28,14 +28,14 @@ public class Bus : IBus {
             throw new Exception("wrong station path");
         }
 
-        _path = path;
+        _path = new Queue<IStation>(path);
         _start = path[0];
         _goal = path[path.Count - 1];
-         
     }
 
-    public List<IPassenger> PassThroughStation(IStation station) { 
-        if (station != _goal) {
+    public List<IPassenger> PassThroughNextStation() {
+        IStation station = _path.Dequeue();
+        if (_path.Count != 0) {
             var arriveds = _busPassengersCheckStation(station);
             var aboards = _stationPassengersAboardBus(station);
             arriveds.AddRange(aboards);
