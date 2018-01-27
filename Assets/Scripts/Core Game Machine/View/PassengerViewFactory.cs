@@ -5,11 +5,18 @@ using UnityEngine;
 public class PassengerViewFactory : MonoBehaviour
 {
     [SerializeField]
-	PassengerSettings settings = null;
+	PassengerSettings settings;
 
-    public IPassengerView MakePassengerView() 
+    [SerializeField]
+    PassengerLabelSettings labelSettings;
+
+    public IPassengerView MakePassengerView(int dest) 
 	{
 		GameObject prefab = UnityEngine.Object.Instantiate(this.settings.GetPrefabRandom());
-        return new PassengerView(prefab);
+
+        Sprite label = UnityEngine.Object.Instantiate(this.labelSettings.GetSpriteOfIndex(dest));
+
+        return new PassengerView(prefab, label);
     }
+    
 }

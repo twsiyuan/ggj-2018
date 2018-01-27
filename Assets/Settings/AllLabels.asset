@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f21287f8b11a92459c4bda2a3330f28, type: 3}
+  m_Name: AllLabels
+  m_EditorClassIdentifier: 
+  settings:
+  - {fileID: 21300000, guid: 2c20f519d03a4e04d90bb4a3fbe3f8ff, type: 3}
+  - {fileID: 21300000, guid: d2ea283e08e3a7a4a8139913c271634c, type: 3}
+  - {fileID: 21300000, guid: da0d77a9c87725f438ba657733ac8565, type: 3}
+  - {fileID: 21300000, guid: ad6899c921792284fa36a85d4d0ea535, type: 3}
+  - {fileID: 21300000, guid: 7e9ed1474d824b04fab47a74e998e82f, type: 3}
+  - {fileID: 21300000, guid: 2cdd14168a8056845adaf356fef701bc, type: 3}
+  - {fileID: 21300000, guid: 6ea7c73a3f8818a4587013de1d956266, type: 3}

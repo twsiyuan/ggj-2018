@@ -139,13 +139,13 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 368876039}
-  - {fileID: 578493091}
-  - {fileID: 209800315}
-  - {fileID: 313838364}
-  - {fileID: 1554120264}
   - {fileID: 523127660}
+  - {fileID: 1554120264}
+  - {fileID: 313838364}
+  - {fileID: 368876039}
   - {fileID: 1133446657}
+  - {fileID: 209800315}
+  - {fileID: 578493091}
   m_Father: {fileID: 2008768376}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -365,7 +365,7 @@ RectTransform:
   - {fileID: 2071288283}
   - {fileID: 1812662128}
   m_Father: {fileID: 59410767}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -501,7 +501,7 @@ RectTransform:
   - {fileID: 1585203615}
   - {fileID: 2088788794}
   m_Father: {fileID: 59410767}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -596,11 +596,11 @@ RectTransform:
   - {fileID: 1257684865}
   - {fileID: 1105430026}
   m_Father: {fileID: 59410767}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26, y: -74}
+  m_AnchoredPosition: {x: 26, y: -73.99998}
   m_SizeDelta: {x: 85, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &368876040
@@ -831,7 +831,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 6ea7c73a3f8818a4587013de1d956266, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.49411765, b: 0.49411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1081,7 +1081,7 @@ RectTransform:
   - {fileID: 182060422}
   - {fileID: 451540105}
   m_Father: {fileID: 59410767}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1175,11 +1175,11 @@ RectTransform:
   - {fileID: 489916090}
   - {fileID: 383310924}
   m_Father: {fileID: 59410767}
-  m_RootOrder: 1
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -89, y: -408}
+  m_AnchoredPosition: {x: -88.99997, y: -407.99994}
   m_SizeDelta: {x: 85, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &578493092
@@ -1580,9 +1580,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ad6899c921792284fa36a85d4d0ea535, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.49264705, b: 0.49264705, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1623,11 +1623,11 @@ RectTransform:
   - {fileID: 607795155}
   - {fileID: 848607024}
   m_Father: {fileID: 59410767}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -346, y: -32.521896}
+  m_AnchoredPosition: {x: -345.99997, y: -32.52185}
   m_SizeDelta: {x: 85, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1133446660
@@ -1931,11 +1931,11 @@ RectTransform:
   - {fileID: 732407297}
   - {fileID: 968673895}
   m_Father: {fileID: 59410767}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 304.03516, y: -108.87593}
+  m_AnchoredPosition: {x: 304.03516, y: -108.875916}
   m_SizeDelta: {x: 85, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1554120266
@@ -2341,6 +2341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 3d4e91bad1d264a8aaf85c969c709c05, type: 2}
+  labelSettings: {fileID: 11400000, guid: 28d51d86b131d224ca314abf31637738, type: 2}
 --- !u!114 &1730206743
 MonoBehaviour:
   m_ObjectHideFlags: 0
