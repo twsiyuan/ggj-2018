@@ -28,6 +28,8 @@ public partial class GameController : MonoBehaviour
 
     private IPassengerGenerator _passengerGenerator;
 
+    private PassengerEventManager _passengerEventManager;
+
     Queue<IStation[]> stationsBuffer = new Queue<IStation[]>();
 
 	private void Reset(){
@@ -57,9 +59,16 @@ public partial class GameController : MonoBehaviour
 
         _passengerMgr = new PassengerManager();
 		
-        _passengerGenerator = new PassengerGenerator(this, map, _passengerMgr, passengerViewFactory); 
+        _passengerGenerator = new PassengerGenerator(this, map, _passengerMgr, passengerViewFactory);
 
-		InitSubSystems();
+        _passengerEventManager = new PassengerEventManager(_passengerGenerator);
+
+        _passengerEventManager.StartWaitingEvent += (p) => { Debug.Log("waiting +1"); };
+        _passengerEventManager.StopWaitingEvent += (p) => { Debug.Log("waiting -1"); };
+        _passengerEventManager.SuccessArriveEvent += (p) => { Debug.Log("success +1"); };
+        _passengerEventManager.AngryExitEvent += (p) => { Debug.Log("angry +1"); };
+
+        InitSubSystems();
 
         StartCoroutine(this.MainLoop());
     }
