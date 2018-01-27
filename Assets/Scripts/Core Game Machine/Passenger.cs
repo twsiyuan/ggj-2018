@@ -14,7 +14,7 @@ public class Passenger : IPassenger {
     public bool IsMoving { get { return _status == PassengerStatus.Moving; } }
     public bool IsArrived { get { return _status == PassengerStatus.Arrived; } }
 
-    private readonly int _rageMax = 10000;
+    private readonly int _rageMax = 5000;
     private int _rage;
     private readonly int _waitingRage = 1;
     private readonly int _movingRage = 0;
@@ -67,9 +67,18 @@ public class Passenger : IPassenger {
             _addMovingRage();
         }
 
+        _updateRageFace();
+
         if (_rage > _rageMax) {
             _fail();
         }
+    }
+
+    private void _updateRageFace() {
+        float rageScale = (float)_rage / (float)_rageMax;
+        if (rageScale < 0.5f) View.ChangeToFace1();
+        else if (rageScale < 0.8f) View.ChangeToFace2();
+        else View.ChangeToFace3();
     }
 
     private void _waitingAtStation(IStation station) {
