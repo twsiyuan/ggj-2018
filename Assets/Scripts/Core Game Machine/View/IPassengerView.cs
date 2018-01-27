@@ -16,4 +16,6 @@ public interface IPassengerView
     IEnumerator GetOffBusToStationAnimation(Transform stationTransform, int order);
 
     void ArrivedStationAnimate(Transform busTransform, int order, int total);
+
+    void FailedAnimate();
 }

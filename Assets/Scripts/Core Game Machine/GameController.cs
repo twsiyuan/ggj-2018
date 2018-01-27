@@ -54,7 +54,7 @@ public partial class GameController : MonoBehaviour
 
     private void Start() {
         _passengerMgr = new PassengerManager();
-        _passengerGenerator = new PassengerGenerator(map, _passengerMgr, passengerViewFactory); 
+        _passengerGenerator = new PassengerGenerator(this, map, _passengerMgr, passengerViewFactory); 
 
 		InitBusCenter();
 

@@ -8,6 +8,7 @@ public class Passenger : IPassenger {
         Waiting,
         Moving,
         Arrived,
+        Failed,
     }
     private PassengerStatus _status; 
     public bool IsWaiting { get { return _status == PassengerStatus.Waiting; } }
@@ -25,11 +26,14 @@ public class Passenger : IPassenger {
     private IPassengerView _view;
     public IPassengerView View { get { return _view; } }
 
-    public Passenger(IStation start, IStation goal, IPassengerView view) {
+    private GameController _gameCtrl;
+
+    public Passenger(IStation start, IStation goal, IPassengerView view, GameController gameCtrl) {
         _start = start;
         _goal = goal;
         _rage = 0;
         _view = view;
+        _gameCtrl = gameCtrl;
 
         _waitingAtStation(start);
     }
@@ -100,7 +104,10 @@ public class Passenger : IPassenger {
     }
 
     private void _fail() {
+        _status = PassengerStatus.Failed;
         Debug.Log("passenger ANGRY!");
+        _gameCtrl.AddRage(1);
+        _view.FailedAnimate();
     }
 
     private void _addWaitingRage() {
