@@ -2,7 +2,9 @@
 {
     bool IsWaiting { get; }
     bool IsMoving { get; }
-    bool IsArrived { get; } 
+    bool IsArrived { get; }
+
+    IPassengerView View { get; }
 
     void AboardBus(IBus bus); 
 

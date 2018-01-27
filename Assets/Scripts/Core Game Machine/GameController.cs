@@ -1,49 +1,60 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public partial class GameController : MonoBehaviour
 {
-    [SerializeField]
+    
+	[SerializeField]
     private AnimateManager _animateMgr;
 
     [SerializeField]
+	private BusCenter busCenter;
+	
+	[SerializeField]
+	private Map map;
+
+	[SerializeField]
 	private MapInput mapInput;
 
 	[SerializeField]
-	private Map map;
+	private ScoreBoard scoreBoard;
 
     [SerializeField]
     private PassengerViewFactory passengerViewFactory;
 
     private IPassengerManager _passengerMgr;
+
     private IPassengerGenerator _passengerGenerator;
 
     Queue<IStation[]> stationsBuffer = new Queue<IStation[]>();
 
-	void Reset(){
+	private void Reset(){
 		this.map = this.GetComponentInChildren<Map> ();
 		this.mapInput = this.GetComponentInChildren<MapInput> ();
 	}
 
-	void Awake(){
+	private void Awake(){
 		this.mapInput.SelectEnded += this.OnMapInput_SelectEnded;
 	}
 
-	void OnDestroy(){
+	private void OnDestroy(){
 		if (this.mapInput != null) {
 			this.mapInput.SelectEnded -= this.OnMapInput_SelectEnded;
 		}
 	}
 
-	void OnMapInput_SelectEnded (object sender, MapInput.SelectEndEventArgs e)
+	private void OnMapInput_SelectEnded (object sender, MapInput.SelectEndEventArgs e)
 	{
 		this.stationsBuffer.Enqueue (e.Stations);
 	}
 
-    void Start() {
+    private void Start() {
         _passengerMgr = new PassengerManager();
         _passengerGenerator = new PassengerGenerator(map, _passengerMgr, passengerViewFactory); 
 
+		InitBusCenter();
+
         StartCoroutine(this.MainLoop());
     }
+
 }

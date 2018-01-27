@@ -34,13 +34,16 @@ public class Bus : IBus {
          
     }
 
-    public void PassThroughStation(IStation station) {
+    public List<IPassenger> PassThroughStation(IStation station) { 
         if (station != _goal) {
-            _busPassengersCheckStation(station);
-            _stationPassengersAboardBus(station);
+            var arriveds = _busPassengersCheckStation(station);
+            var aboards = _stationPassengersAboardBus(station);
+            arriveds.AddRange(aboards);
+            return arriveds;
         }
         else {
-            _busPassengersAllGetOff(station);
+            var dictInfo = _busPassengersAllGetOff(station);
+            return dictInfo;
         }
     }
 
@@ -51,9 +54,10 @@ public class Bus : IBus {
     private List<IPassenger> _busPassengersCheckStation(IStation station) {
         List<IPassenger> arriveds = new List<IPassenger>();
         for (int i = 0; i < _passengers.Count; i++) {
-            bool isArrived = _passengers[i].PassThroughNextStation(station, this);
+            IPassenger current = _passengers[i];
+            bool isArrived = current.PassThroughNextStation(station, this); 
             if (isArrived) {
-                arriveds.Add(_passengers[i]);
+                arriveds.Add(current);
             }
         }
         return arriveds;
@@ -61,7 +65,7 @@ public class Bus : IBus {
 
     private List<IPassenger> _stationPassengersAboardBus(IStation station) {
 		var waitingPassengers = new List<IPassenger> ();
-		station.PickupPassengers(_capacity - _passengers.Count, waitingPassengers);
+		station.PickupPassengers(_capacity - _passengers.Count, waitingPassengers); 
         foreach (IPassenger passneger in waitingPassengers) {
             passneger.AboardBus(this);
             _passengers.Add(passneger);
@@ -69,10 +73,13 @@ public class Bus : IBus {
         return waitingPassengers;
     }
 
-    private void _busPassengersAllGetOff(IStation station) {
+    private List<IPassenger> _busPassengersAllGetOff(IStation station) {
+        List<IPassenger> getOffs = new List<IPassenger>();
         for (int i = 0; i < _passengers.Count; i++) {
-            _passengers[i].GetOffFromBusAndArriveStation(station);
+            bool arrived = _passengers[i].GetOffFromBusAndArriveStation(station);
+            getOffs.Add(_passengers[i]);
         }
         _passengers.Clear();
+        return getOffs;
     }
 }

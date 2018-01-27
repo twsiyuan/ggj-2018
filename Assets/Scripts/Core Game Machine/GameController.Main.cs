@@ -17,7 +17,7 @@ public partial class GameController : MonoBehaviour
 			var stations = this.stationsBuffer.Dequeue ();
 			Debug.Log("Listener get the result : "+ string.Join(",", stations.Select(v => v.Index.ToString()).ToArray()));
 
-			IBus bus = new Bus(0, 0);
+			IBus bus = new Bus(5, 5);
             bus.StartBusPath(new List<IStation>(stations));
 			_animateMgr.PlayBusAnimate(bus);
 		}

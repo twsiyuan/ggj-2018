@@ -4,9 +4,10 @@ using UnityEngine;
 using DG.Tweening;
 
 [Serializable]
-public class BusView :IBusView
+public class BusView : IBusView
 {
     private GameObject _busPrefab;
+    public Transform Transform { get { return _busPrefab.transform; } }
 
     public BusView(GameObject prefab) {
         _busPrefab = prefab;
@@ -29,8 +30,7 @@ public class BusView :IBusView
 			_busPrefab.transform.position = road.GetPosition (t);
 			yield return null;
 		}
-		_busPrefab.transform.position = road.GetPosition (1);
-        Debug.Log("arrive " + _busPrefab.transform.position);
+		_busPrefab.transform.position = road.GetPosition (1); 
     }
     
 }
