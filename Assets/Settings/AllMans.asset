@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: AllMans
+  m_EditorClassIdentifier: Assembly-CSharp::PassengerSettings
+  settings:
+  - prefab: {fileID: 1799836374937732, guid: 4dfc5a4587e88b5409df6e7d6684589e, type: 2}
+    probabilityWeight: 1
+  - prefab: {fileID: 1799836374937732, guid: f613a71f4b51d4c1cbcb3f7a49046acd, type: 2}
+    probabilityWeight: 1
