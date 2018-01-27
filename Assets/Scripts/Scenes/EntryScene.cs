@@ -8,7 +8,13 @@ public class EntryScene : MonoBehaviour {
 	[SerializeField]
 	string nextScene;
 
-	public void NextScene(){
+	public void ToMenu(){
 		SceneManager.LoadScene (this.nextScene, LoadSceneMode.Single);
 	}
+
+	public void ToCredit(){
+		// TODO: To Credit
+	}
+
+
 }
