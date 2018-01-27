@@ -22,7 +22,7 @@ public class BusView : IBusView
     }
 
 	public IEnumerator MoveToStationAnimate(IRoad road) {
-        float duration = 2;
+        float duration = road.GetTotalDistance() * 0.3f;
 		var startTime = Time.time;
 		var endTime = startTime + duration;
 		while (Time.time < endTime){

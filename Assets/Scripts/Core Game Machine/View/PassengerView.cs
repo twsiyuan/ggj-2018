@@ -35,9 +35,9 @@ public class PassengerView : IPassengerView
         yield return new WaitForSeconds(_duration);
     }
     
-    public void ArrivedStationAnimate(Transform busTransform, int order) { 
+    public void ArrivedStationAnimate(Transform busTransform, int order, int total) { 
         Vector3 pos = busTransform.position;
-        pos.x += (order - 2) * _interval;
+        pos.x += (order - total/2) * _interval;
         pos.y -= _interval;
         _passengerPrefab.transform.position = pos;
         _passengerPrefab.SetActive(true);

@@ -60,7 +60,7 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
 
     private IEnumerator _arrivedAnimate(List<IPassenger> arriveds, IBusView busView) {
         for (int i = 0; i < arriveds.Count; i++) {
-            arriveds[i].View.ArrivedStationAnimate(busView.Transform, i);
+            arriveds[i].View.ArrivedStationAnimate(busView.Transform, i, arriveds.Count);
             yield return new WaitForSeconds(0.2f);
         }
     }
