@@ -58,18 +58,26 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 
     #region [ Sensors ]
     
+	void Awake(){
+		map = GetComponent<Map>();
+		map.MapChanged += this.OnMapChanged;
+	}
+
+	void OnDestroy(){
+		if (map != null) {
+			map.MapChanged -= this.OnMapChanged;
+		}
+	}
+
+	void OnMapChanged (object sender, System.EventArgs e)
+	{
+		// TODO: 地圖改變，修改 Sensor	
+	}
+
     void Start()
     {
-        InitTable();
-
         InitLinkers();
-
         InitSensors();
-    }
-
-    private void InitTable()
-    {
-        map = GetComponent<Map>();
     }
 
     private void InitLinkers()
