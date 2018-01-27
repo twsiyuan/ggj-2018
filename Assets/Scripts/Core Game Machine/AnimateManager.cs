@@ -25,11 +25,8 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
 
         _busView.InitAnimate();
 
-        Debug.Log("bus start");
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log("bus go 1");
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log("bus go 2");
+        _busView.MoveToStationAnimate();
 
+        yield return null;
     }
 }
