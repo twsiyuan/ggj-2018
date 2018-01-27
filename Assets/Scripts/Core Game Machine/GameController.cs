@@ -1,26 +1,40 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
-public class GameController : MonoBehaviour
+public partial class GameController : MonoBehaviour
 {
-    private IGameLoop _gameLoop;
-    private ISensorListener _sensorListener;
-
     [SerializeField]
     private AnimateManager _animateMgr;
+
     [SerializeField]
-    private GameMachine_Prototype _gameMachine;
+	private MapInput mapInput;
+
+	[SerializeField]
+	private Map map;
+
+	Queue<IStation[]> stationsBuffer = new Queue<IStation[]>();
+
+	void Reset(){
+		this.map = this.GetComponentInChildren<Map> ();
+		this.mapInput = this.GetComponentInChildren<MapInput> ();
+	}
+
+	void Awake(){
+		this.mapInput.SelectEnded += this.OnMapInput_SelectEnded;
+	}
+
+	void OnDestroy(){
+		if (this.mapInput != null) {
+			this.mapInput.SelectEnded -= this.OnMapInput_SelectEnded;
+		}
+	}
+
+	void OnMapInput_SelectEnded (object sender, MapInput.SelectEndEventArgs e)
+	{
+		this.stationsBuffer.Enqueue (e.Stations);
+	}
 
     void Start() {
-        _gameLoop = new GameLoop();
-        _sensorListener = new SensorListener(_gameMachine);
-
-        _gameLoop.Initial(_sensorListener, _animateMgr);
-
-        StartCoroutine(_gameLoop.MainLoop());
-         
-    }
-
-    void Update() {
-        // _gameLoop.Update();
+        StartCoroutine(this.MainLoop());
     }
 }

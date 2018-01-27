@@ -20,9 +20,9 @@ public class MapInput : MonoBehaviour, IDragSensorManager
 		}
 	}
 
-	public event System.EventHandler SelectStarted;
+	public event System.EventHandler<SelectStartEventArgs> SelectStarted;
 
-	public event System.EventHandler SelectEnded;
+	public event System.EventHandler<SelectEndEventArgs> SelectEnded;
 
     #region [ Fields / Properties - Sensor]
 
