@@ -1494,6 +1494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ff7832b4097f0449ec8611e39a6a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animateMgr: {fileID: 1730206741}
   _gameMachine: {fileID: 713022020}
 --- !u!4 &1730206740
 Transform:
