@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 798841b6aad2bba4d9e693fd7497c043, type: 3}
+  m_Name: AllBus
+  m_EditorClassIdentifier: 
+  settings:
+  - {fileID: 1694110322005340, guid: 10e093c9917c350498a918efec68e294, type: 2}
+  - {fileID: 1565807981971044, guid: b6f4a66482f0faf4aa28c359b236e4f7, type: 2}
+  - {fileID: 1156948837492532, guid: 22604d1e20fc1b3409890e5122043121, type: 2}
+  - {fileID: 1078882190144328, guid: 5441da3bfdd49a143b3d8b00ea417f6b, type: 2}
+  - {fileID: 1964959281651522, guid: 686fbfb6f8fa6ab4ba7200385a55e68f, type: 2}

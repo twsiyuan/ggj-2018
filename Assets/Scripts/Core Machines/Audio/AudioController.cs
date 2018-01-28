@@ -1,34 +1,36 @@
 ﻿using UnityEngine;
+using MarsCode113.ServiceFramework;
 
 public class AudioController : MonoBehaviour
 {
     [SerializeField]
-    private AudioSource _bgm;
+    private AudioClip _bgm;
 
     [SerializeField]
-    private GameObject _busStart;
+    private AudioClip _busStart;
     private float _busStartDuration = 5f;
 
     [SerializeField]
-    private GameObject _busDoor;
+    private AudioClip _busDoor;
     private float _busDoorDuration = 1f;
 
     [SerializeField]
     private AnimateManager _animateMgr;
 
-    private void Start() {
-        _bgm.Play();
+    private IAudioManager _manager;
+
+    private void Start() { 
+        _manager = ServiceEngine.Instance.GetManager<IAudioManager>();
+        _manager.Play(0, _bgm); 
 
         _animateMgr.StartBusEvent += _playStartBusAudio;
         _animateMgr.BusDoorOpenEvent += _playBusDoorAudio;
     }
 
     private void _playStartBusAudio() {
-        GameObject obj = Instantiate(_busStart);
-        Destroy(obj, _busStartDuration);
+        _manager.PlayOneShot(0, _busStart);
     }
     private void _playBusDoorAudio() {
-        GameObject obj = Instantiate(_busDoor);
-        Destroy(obj, _busDoorDuration);
+        _manager.PlayOneShot(0, _busDoor);
     }
 }
