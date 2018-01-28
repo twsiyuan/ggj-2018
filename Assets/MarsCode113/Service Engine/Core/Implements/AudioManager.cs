@@ -29,7 +29,7 @@ namespace MarsCode113.ServiceFramework
 
         public AudioClip GetClip(int index)
         {
-            return SoundPack.GetClipAt(index);
+            return null;
         }
 
         #endregion
