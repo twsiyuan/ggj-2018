@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4041979253058544}
   - component: {fileID: 212656687847988540}
+  - component: {fileID: 114991066133009026}
   m_Layer: 0
   m_Name: Bus3
   m_TagString: Untagged
@@ -40,6 +41,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114991066133009026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1156948837492532}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0fd3b788bde4f9080ea3ea3ce2c1b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeAttr: {x: 0, y: 0.1, z: 0}
+  speed: 50
 --- !u!212 &212656687847988540
 SpriteRenderer:
   m_ObjectHideFlags: 1
