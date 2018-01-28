@@ -10,7 +10,23 @@ public class SecretShake : MonoBehaviour
 	[SerializeField]
 	float speed = 50.0f;
 
+	AudioSource audio;
 
+	void Awake(){
+		this.audio = this.GetComponent<AudioSource> ();
+	}
+
+	void OnEnable(){
+		if (this.audio != null) {
+			this.audio.Play ();
+		}
+	}
+
+	void OnDisable(){
+		if (this.audio != null) {
+			this.audio.Stop ();
+		}
+	}
 	
 	// Update is called once per frame
 	void LateUpdate () 
