@@ -9,16 +9,11 @@ public class PassengerEventManager : IPassengerEventManager {
     public event Action<IPassenger> SuccessArriveEvent;
     public event Action<IPassenger> AngryExitEvent;
 
-    public PassengerEventManager(PassengerGenerator passengerGenerator) {
-        StartWaitingEvent = null;
-        StopWaitingEvent = null;
-        SuccessArriveEvent = null;
-        AngryExitEvent = null;
-         
+    public PassengerEventManager(PassengerGenerator passengerGenerator) {  
         passengerGenerator.GeneratePassengerEvent += _addEventOnNewPassenger; 
     }
 
-    private void _addEventOnNewPassenger(IPassenger passenger) {
+    private void _addEventOnNewPassenger(IPassenger passenger) { 
         passenger.StartWaitingEvent += _startWaiting;
         passenger.StopWaitingEvent += _stopWaiting;
         passenger.SuccessArriveEvent += _successArrive;
@@ -26,6 +21,7 @@ public class PassengerEventManager : IPassengerEventManager {
     }
 
     private void _startWaiting(IPassenger passenger) {
+        Debug.Log("Add");
         if (StartWaitingEvent != null)
             StartWaitingEvent(passenger);
     }
