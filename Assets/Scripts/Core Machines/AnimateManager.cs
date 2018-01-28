@@ -25,7 +25,7 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
 
         List<IStation> stations = bus.BusPath;
 
-        IBusView _busView = _busViewFactory.MakeBusView();
+        IBusView _busView = _busViewFactory.MakeBusView(bus);
 
         if (StartBusEvent != null)
             StartBusEvent.Invoke();
