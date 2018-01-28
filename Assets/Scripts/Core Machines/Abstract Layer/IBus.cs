@@ -3,6 +3,7 @@
 public interface IBus
 {
     int Distance { get; }
+    int ViewID { get; }
 
     void StartBusPath(List<IStation> path);
 

@@ -19,7 +19,7 @@ public class UnitTest
 
         int distance = 3;
         int capacity = 5;
-        IBus b = new Bus(distance, capacity);
+        IBus b = new Bus(distance, capacity, 0);
 
         List<IStation> path = new List<IStation>() {
             s1, s2, s3
@@ -49,7 +49,7 @@ public class UnitTest
 
         int distance = 3;
         int capacity = 5;
-        IBus b = new Bus(distance, capacity);
+        IBus b = new Bus(distance, capacity, 0);
 
         List<IStation> path = new List<IStation>() {
             s1, s2, s3
@@ -89,7 +89,7 @@ public class UnitTest
 
         int distance = 3;
         int capacity = 3;
-        IBus b = new Bus(distance, capacity);
+        IBus b = new Bus(distance, capacity, 0);
 
         List<IStation> path = new List<IStation>() {
             s1, s2, s3
@@ -140,7 +140,7 @@ public class UnitTest
 
         int distance = 3;
         int capacity = 3;
-        IBus b = new Bus(distance, capacity);
+        IBus b = new Bus(distance, capacity, 0);
 
         List<IStation> path = new List<IStation>() {
             s1, s2, s3

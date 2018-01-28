@@ -7,7 +7,9 @@ public class Bus : IBus {
 
     private int _distance;
     private int _capacity;
+    private int _viewID;
     public int Distance { get { return _distance; } }
+    public int ViewID { get { return _viewID; } }
 
     private IStation _start;
     private IStation _goal;
@@ -17,9 +19,10 @@ public class Bus : IBus {
 
     private List<IPassenger> _passengers;
 
-    public Bus(int distance, int capacity) {
+    public Bus(int distance, int capacity, int viewID) {
         _distance = distance;
         _capacity = capacity;
+        _viewID = viewID;
         _passengers = new List<IPassenger>();
     }
 
