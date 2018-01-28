@@ -20,3 +20,7 @@ MonoBehaviour:
     probabilityWeight: 1
   - prefab: {fileID: 1799836374937732, guid: adeec3b44b1044c04b39c5571045da30, type: 2}
     probabilityWeight: 1
+  - prefab: {fileID: 1799836374937732, guid: 9dafd66a3d9a14074a647e7af0515751, type: 2}
+    probabilityWeight: 1
+  - prefab: {fileID: 1799836374937732, guid: 3b3bbc4cc925f4578ba232bc187a24a0, type: 2}
+    probabilityWeight: 1
