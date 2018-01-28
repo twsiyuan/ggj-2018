@@ -9,6 +9,14 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
     [SerializeField]
     private BusViewFactory _busViewFactory;
 
+    public event Action StartBusEvent;
+    public event Action BusDoorOpenEvent;
+
+    void Awake() {
+        StartBusEvent = null;
+        BusDoorOpenEvent = null;
+    }
+
     public void PlayBusAnimate(BusCenter busCenter, IBus bus) { 
         StartCoroutine(_playBusAnimate(busCenter, bus));
     }
@@ -18,6 +26,9 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
         List<IStation> stations = bus.BusPath;
 
         IBusView _busView = _busViewFactory.MakeBusView();
+
+        if (StartBusEvent != null)
+            StartBusEvent.Invoke();
 
         yield return _busView.InitAnimate(stations[0].Transform.position);
         yield return _waitPassThourghStation(bus, _busView, stations[0]);
@@ -59,12 +70,19 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
     private IEnumerator _arrivedAnimate(List<IPassenger> arriveds, IBusView busView) {
         for (int i = 0; i < arriveds.Count; i++) {
             arriveds[i].View.ArrivedStationAnimate(busView.Transform, i, arriveds.Count);
+             
+            if (BusDoorOpenEvent != null)
+                BusDoorOpenEvent.Invoke();
+
             yield return new WaitForSeconds(0.2f);
         }
     }
 
     private IEnumerator _getOffAnimate(List<IPassenger> getOffs, IStation station, int orderBase) { 
         for (int i = 0; i < getOffs.Count; i++) {
+            if (BusDoorOpenEvent != null)
+                BusDoorOpenEvent.Invoke();
+
             yield return getOffs[i].View.GetOffBusToStationAnimation(station.Transform, i + orderBase);
         }
     }
@@ -72,6 +90,9 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
     private IEnumerator _aboardAnimate(List<IPassenger> aboards, IStation station) {
         for (int i = 0; i < aboards.Count; i++) {
             yield return aboards[i].View.AboardBusAnimate(station.Transform);
+
+            if (BusDoorOpenEvent != null)
+                BusDoorOpenEvent.Invoke();
         }
     }
 
