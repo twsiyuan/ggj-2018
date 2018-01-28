@@ -848,7 +848,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 6ea7c73a3f8818a4587013de1d956266, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e9ed1474d824b04fab47a74e998e82f, type: 3}
   m_Color: {r: 1, g: 0.49411765, b: 0.49411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2005,9 +2005,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc1c62edc1b84cc9ae18b9a44f38ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  busMax: 3
   busCenterView: {fileID: 1730206745}
   busViewFactory: {fileID: 1730206743}
+  _busStyle:
+  - Distance: 5
+    Capacity: 10
+    ViewId: 0
+  - Distance: 5
+    Capacity: 10
+    ViewId: 0
 --- !u!114 &1730206745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2036,6 +2042,19 @@ MonoBehaviour:
   _waitIntervalMax: 2
   _waitIntervalMin: 2
   _maxWaitingPeople: 10
+  _options:
+  - Start: 4
+    End: 0
+    Weight: 1
+  - Start: 4
+    End: 1
+    Weight: 1
+  - Start: 4
+    End: 2
+    Weight: 1
+  - Start: 4
+    End: 3
+    Weight: 1
 --- !u!114 &1730206747
 MonoBehaviour:
   m_ObjectHideFlags: 0
