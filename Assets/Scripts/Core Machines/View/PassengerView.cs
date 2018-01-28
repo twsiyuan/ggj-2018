@@ -22,6 +22,12 @@ public class PassengerView : IPassengerView
     private readonly float _arriveFadeDuration = 1f;
     private readonly float _failFadeDuration = 3f;
 
+	public Transform Transform{
+		get{
+			return this._passengerPrefab.transform;
+		}
+	}
+
     public PassengerView(GameObject passenger, Sprite label) {
         _passengerPrefab = passenger;
         _passengerPrefab.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);

@@ -21,7 +21,7 @@ public class PassengerEventManager : IPassengerEventManager {
     }
 
     private void _startWaiting(IPassenger passenger) {
-        Debug.Log("Add");
+//        Debug.Log("Add");
         if (StartWaitingEvent != null)
             StartWaitingEvent(passenger);
     }
