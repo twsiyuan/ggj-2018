@@ -11,18 +11,20 @@ public class MenuScene : MonoBehaviour {
 	[SerializeField]
 	private List<Image> levels;
 
+	[SerializeField]
+	private string[] levelName;
+
 	private void Start()
 	{
-		int id = 1;
-		
+		int id = 0;
+
 		foreach (var lv in levels)
 			UIClickSensor.Init(lv, LevelClickEvent, id++);
 	}
 
 	private void LevelClickEvent(UIClickSensor ev)
 	{
-		var sceneName = ev.Target.name;
-		ServiceEngine.Instance.SwitchScene(sceneName);
+		ServiceEngine.Instance.SwitchScene(levelName[ev.Id]);
 	}
 
 	#region [Editor Compilation]
@@ -52,6 +54,8 @@ public class MenuScene : MonoBehaviour {
 		var width = layout.cellSize.x * levelAmount + layout.spacing.x * (levelAmount - 1);
 
 		scrollContent.sizeDelta = new Vector2(width, scrollContent.sizeDelta.y);
+
+		
 
 		layout.enabled = true;
 		StartCoroutine(DisableLayout(layout));
