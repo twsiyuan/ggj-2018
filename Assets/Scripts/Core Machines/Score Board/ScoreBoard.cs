@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using MarsCode113.ServiceFramework;
 
 public class ScoreBoard : MonoBehaviour
 {	
@@ -19,8 +21,21 @@ public class ScoreBoard : MonoBehaviour
     private int rageMax = 20;
 
     [SerializeField]
+    private Image back;
+
+    [SerializeField]
     private ScoreBoardView view = new ScoreBoardView();
 
+    private void Start()
+    {
+        UIClickSensor.Init(back, BackToMenuScene);
+    }
+    
+    private void BackToMenuScene(UIClickSensor ev)
+    {
+        ServiceEngine.Instance.SwitchScene("Menu");
+    }
+    
     public void AddScore(int value)
     {
         var temp = score;
