@@ -18,7 +18,7 @@ public class BusViewFactory : MonoBehaviour {
         Quaternion q = obj.transform.localRotation;
         q.eulerAngles = new Vector3(0, 180, 0f);
         obj.transform.localRotation = q;
-        obj.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
+        obj.transform.localScale = new Vector3(0.3f * 0.6f, 0.3f * 0.6f, 1f);
         return obj;
     }
 
