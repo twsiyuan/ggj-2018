@@ -29,17 +29,17 @@ public class ScoreBoardView
     
     public void UpdatePassengerCompletion(int value)
     {
-        completion.text = "累積乘載數: " + value.ToString();
+        completion.text = "累積乘載數 : " + value.ToString();
     }
 
     public void UpdateWaitingPassenger(int value)
     {
-        waiting.text = "等待乘客數:" + value.ToString();
+        waiting.text = "等待乘客數 :" + value.ToString();
     }
 
     public void UpdateDepot(string value)
     {
-        depot.text = "派車數量: " + value;
+        depot.text = "派車數量 : " + value;
     }
 
     public void UpdateRage(float value)

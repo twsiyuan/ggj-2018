@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BusCenter : MonoBehaviour
-{	
-
-    [SerializeField]
-    private int busMax = 3;
-
+{	 
     [SerializeField]
     private BusCenterView busCenterView;
     [SerializeField]
     private BusViewFactory busViewFactory;
+
+    [SerializeField]
+    private BusStyle[] _busStyle;
+    [Serializable]
+    private class BusStyle {
+        [SerializeField]
+        public int Distance; 
+        [SerializeField]
+        public int Capacity; 
+        [SerializeField]
+        public int ViewId;
+    }
 
     Queue<IBus> depot = new Queue<IBus>();
 
@@ -38,9 +46,12 @@ public class BusCenter : MonoBehaviour
 	{
 		var buses = new List<IBus>();
 
-        for (int i = 0; i < busMax; i++) {
-            int viewID = busViewFactory.GetRandomIndex();
-            IBus newBus = new Bus(5, 5, viewID);
+        for (int i = 0; i < _busStyle.Length; i++) {
+            BusStyle busstyle = _busStyle[i];
+            int distance = busstyle.Distance;
+            int capacity = busstyle.Capacity;
+            int viewID = busstyle.ViewId;
+            IBus newBus = new Bus(distance, capacity, viewID);
             buses.Add(newBus);
             busCenterView.InsertNewBus(newBus);
         }
@@ -81,7 +92,7 @@ public class BusCenter : MonoBehaviour
 
     private string GetBusState()
     {
-        return string.Format("{0}/{1}", depot.Count, busMax);
+        return string.Format("{0} / {1}", depot.Count, _busStyle.Length);
     }
 	
 }

@@ -2766,7 +2766,14 @@ MonoBehaviour:
   _passengerViewFactory: {fileID: 1730206742}
   _waitIntervalMax: 1
   _waitIntervalMin: 2
-  _maxWaitingPeople: 20
+  _maxWaitingPeople: 10
+  _options:
+  - Start: 0
+    End: 1
+    Weight: 3
+  - Start: 1
+    End: 2
+    Weight: 1
 --- !u!114 &1730206747
 MonoBehaviour:
   m_ObjectHideFlags: 0
