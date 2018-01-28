@@ -45,7 +45,7 @@ namespace MarsCode113.ServiceFramework
         public void RegisterManager(IServiceManager manager)
         {
             var serviceTag = GetSystemTag(manager.GetType());
-
+  
             if(managers.ContainsKey(serviceTag))
                 throw new InvalidOperationException(string.Format("Manager has existed : {0}", serviceTag));
 
@@ -77,14 +77,26 @@ namespace MarsCode113.ServiceFramework
 
         private string GetSystemTag(Type type)
         {
-            SystemTagAttribute[] attributes;
+            SystemTagAttribute[] attributes = null;
 
-            if(type.IsInterface)
-                attributes = type.GetCustomAttributes(typeof(SystemTagAttribute), false) as SystemTagAttribute[];
+            if (type.IsInterface)
+            {
+                attributes = type.GetCustomAttributes(typeof(SystemTagAttribute), true) as SystemTagAttribute[];
+            }
             else
-                attributes = type.GetInterfaces()[0].GetCustomAttributes(typeof(SystemTagAttribute), false) as SystemTagAttribute[];
+            {
+                var interfaceTypes = type.GetInterfaces();
+                foreach (var interfaceType in type.GetInterfaces())
+                {
+                    attributes = interfaceType.GetCustomAttributes(typeof(SystemTagAttribute), true) as SystemTagAttribute[];
+                    if (attributes.Length > 0)
+                    {
+                        break;
+                    }
+                }
+            }
 
-            return attributes[0].Tag;
+            return attributes == null || attributes.Length <= 0 ? string.Empty : attributes[0].Tag;
         }
 
         #endregion
