@@ -44,6 +44,9 @@ TagManager:
   - name: Bus
     uniqueID: 1750767127
     locked: 0
+  - name: Passenger
+    uniqueID: 1598721611
+    locked: 0
   - name: Line
     uniqueID: 1387843091
     locked: 0
