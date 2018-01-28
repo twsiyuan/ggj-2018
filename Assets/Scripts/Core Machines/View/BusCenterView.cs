@@ -45,11 +45,15 @@ public class BusCenterView : MonoBehaviour
     private void _showBusObject(GameObject busObj, int order) {
         _busObjsShowing.Add(busObj);
         busObj.SetActive(true);
-        busObj.transform.position = new Vector3(-7.5f, 2f + (order+1) * -1.2f * 0.6f, -10);
-        busObj.transform.DOMoveY(2f + order * -1.2f * 0.6f, 1f).Play();
+        busObj.transform.position = new Vector3(-8.2f, _countPosYFormOrder(order+1), -10);
+        busObj.transform.DOMoveY(_countPosYFormOrder(order), 1f).Play();
     }
 
     private void _shiftBusObjectAnimate(GameObject busObj, int order) {
-        busObj.transform.DOMoveY(2f + order * -1.2f * 0.6f, 1f).Play();
+        busObj.transform.DOMoveY(_countPosYFormOrder(order), 1f).Play();
+    }
+
+    private float _countPosYFormOrder(int order) {
+        return 2f + order * -1.2f * 0.6f;
     }
 }

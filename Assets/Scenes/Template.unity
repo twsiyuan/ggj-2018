@@ -2736,9 +2736,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc1c62edc1b84cc9ae18b9a44f38ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  busMax: 3
   busCenterView: {fileID: 1730206745}
   busViewFactory: {fileID: 1730206743}
+  _busStyle:
+  - Distance: 2
+    Capacity: 3
+    ViewId: 1
 --- !u!114 &1730206745
 MonoBehaviour:
   m_ObjectHideFlags: 0
