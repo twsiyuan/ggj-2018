@@ -26,6 +26,14 @@ public class Bus : IBus {
         _passengers = new List<IPassenger>();
     }
 
+	public IEnumerable<IPassenger> GetPassengers(){
+		if (this._passengers != null) {
+			foreach (var p in _passengers) {
+				yield return p;
+			}
+		}
+	}
+
     public void StartBusPath(List<IStation> path) {
         if (path.Count <= 0) {
             throw new Exception("wrong station path");

@@ -3,6 +3,10 @@ using UnityEngine;
 
 public interface IPassengerView
 {
+	Transform Transform {
+		get;
+	}
+
     void ShowViewPositionAtStation(Transform stationTransform, int order);
 
     void ChangeToFace1();

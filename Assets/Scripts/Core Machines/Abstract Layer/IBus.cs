@@ -9,6 +9,8 @@ public interface IBus
 
     List<IStation> BusPath { get; }
 
+	IEnumerable<IPassenger> GetPassengers();
+
     bool HasNextStationOnPath { get; }
 
     List<IPassenger> PassThroughNextStation();

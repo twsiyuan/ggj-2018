@@ -9,8 +9,23 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
     [SerializeField]
     private BusViewFactory _busViewFactory;
 
+	public class BusEventArgs : EventArgs
+	{
+		public IBus Bus {
+			get;
+			set;
+		}
+
+		public IBusView BusView {
+			get;
+			set;
+		}
+	}
+
     public event Action StartBusEvent;
     public event Action BusDoorOpenEvent;
+	public event EventHandler<BusEventArgs> BusArrived;
+	public event EventHandler<BusEventArgs> BusLeaved;
 
     void Awake() {
         StartBusEvent = null;
@@ -58,27 +73,43 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
             else if (p.IsMoving) { aboards.Add(p); }
         });
 
-        yield return _arrivedAnimate(arriveds, busView);
+		if (BusArrived != null) {
+			BusArrived (this, new BusEventArgs(){
+				Bus = bus,
+				BusView = busView,
+			});
+		}
 
-        yield return _getOffAnimate(getOffs, station, waitingNumberBase);
+        yield return _arrivedAnimate(arriveds, bus, busView);
 
-        yield return _aboardAnimate(aboards, station);
+		yield return _getOffAnimate(getOffs, bus, busView, station, waitingNumberBase);
+
+		yield return _aboardAnimate(aboards, bus, busView, station);
+
+		if (BusLeaved != null) {
+			BusLeaved (this, new BusEventArgs(){
+				Bus = bus,
+				BusView = busView,
+			});
+		}
 
          _rearrangeLineAnimate(station);
     }
 
-    private IEnumerator _arrivedAnimate(List<IPassenger> arriveds, IBusView busView) {
+	private IEnumerator _arrivedAnimate(List<IPassenger> arriveds, IBus bus, IBusView busView) {
         for (int i = 0; i < arriveds.Count; i++) {
             arriveds[i].View.ArrivedStationAnimate(busView.Transform, i, arriveds.Count);
              
             if (BusDoorOpenEvent != null)
                 BusDoorOpenEvent.Invoke();
 
+
+
             yield return new WaitForSeconds(0.2f);
         }
     }
 
-    private IEnumerator _getOffAnimate(List<IPassenger> getOffs, IStation station, int orderBase) { 
+	private IEnumerator _getOffAnimate(List<IPassenger> getOffs, IBus bus, IBusView busView, IStation station, int orderBase) { 
         for (int i = 0; i < getOffs.Count; i++) {
             if (BusDoorOpenEvent != null)
                 BusDoorOpenEvent.Invoke();
@@ -87,12 +118,14 @@ public class AnimateManager : MonoBehaviour, IAnimateManager
         }
     }
 
-    private IEnumerator _aboardAnimate(List<IPassenger> aboards, IStation station) {
+	private IEnumerator _aboardAnimate(List<IPassenger> aboards, IBus bus, IBusView busView, IStation station) {
         for (int i = 0; i < aboards.Count; i++) {
             yield return aboards[i].View.AboardBusAnimate(station.Transform);
 
             if (BusDoorOpenEvent != null)
                 BusDoorOpenEvent.Invoke();
+
+
         }
     }
 
