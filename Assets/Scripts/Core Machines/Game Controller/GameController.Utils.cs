@@ -35,9 +35,5 @@ public partial class GameController
 	public void AdjustRageMax(int value)
 	{
 		scoreBoard.AdjustRageMax(value);
-	}
-
-    public int GetStationIndex(IStation station) {
-        return map.GetStationIndex(station);
-    }
+	} 
 }

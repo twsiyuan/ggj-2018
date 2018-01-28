@@ -3,21 +3,19 @@ using UnityEngine;
 
 [Serializable]
 public class PassengerEventManager : IPassengerEventManager {
-    private IPassengerGenerator _passengerGenerator;
 
     public event Action<IPassenger> StartWaitingEvent;
     public event Action<IPassenger> StopWaitingEvent;
     public event Action<IPassenger> SuccessArriveEvent;
     public event Action<IPassenger> AngryExitEvent;
 
-    public PassengerEventManager(IPassengerGenerator passengerGenerator) {
+    public PassengerEventManager(PassengerGenerator passengerGenerator) {
         StartWaitingEvent = null;
         StopWaitingEvent = null;
         SuccessArriveEvent = null;
         AngryExitEvent = null;
-
-        _passengerGenerator = passengerGenerator;
-        _passengerGenerator.GeneratePassengerEvent += _addEventOnNewPassenger; 
+         
+        passengerGenerator.GeneratePassengerEvent += _addEventOnNewPassenger; 
     }
 
     private void _addEventOnNewPassenger(IPassenger passenger) {

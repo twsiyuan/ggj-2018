@@ -1089,6 +1089,7 @@ GameObject:
   - component: {fileID: 487359226}
   - component: {fileID: 487359225}
   - component: {fileID: 487359227}
+  - component: {fileID: 487359228}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -1137,6 +1138,19 @@ MonoBehaviour:
   end: -1
   busTargets: 
   linkFlags: []
+--- !u!114 &487359228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487359224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b486484f727674cce95979b18c9095fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linePrefab: {fileID: 120548346003057184, guid: 8771aeea40a9a4e5c913e4097df40dc8,
+    type: 2}
 --- !u!1 &489916089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2630,7 +2644,7 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2675,6 +2689,7 @@ GameObject:
   - component: {fileID: 1730206747}
   - component: {fileID: 1730206746}
   - component: {fileID: 1730206745}
+  - component: {fileID: 1730206748}
   m_Layer: 0
   m_Name: LevelA
   m_TagString: Untagged
@@ -2698,6 +2713,7 @@ MonoBehaviour:
   map: {fileID: 487359225}
   mapInput: {fileID: 487359227}
   scoreBoard: {fileID: 1390778543}
+  passengerGenerator: {fileID: 1730206748}
   passengerViewFactory: {fileID: 1730206742}
 --- !u!4 &1730206740
 Transform:
@@ -2874,6 +2890,21 @@ MonoBehaviour:
   _busStart: {fileID: 8300000, guid: 82ee7aaf7f3947247910a7635bac11e3, type: 3}
   _busDoor: {fileID: 8300000, guid: 639c61f980e63714d82170711dfbfa4c, type: 3}
   _animateMgr: {fileID: 1730206741}
+--- !u!114 &1730206748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1730206738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c19c62cf9d2494a87b47cb97e1846a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _map: {fileID: 487359225}
+  _passengerViewFactory: {fileID: 1730206742}
+  _waitIntervalMax: 1
+  _waitIntervalMin: 2
 --- !u!1 &1738886069
 GameObject:
   m_ObjectHideFlags: 0

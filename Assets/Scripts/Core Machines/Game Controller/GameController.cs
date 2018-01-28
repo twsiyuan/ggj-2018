@@ -22,11 +22,12 @@ public partial class GameController : MonoBehaviour
 	private ScoreBoard scoreBoard;
 
     [SerializeField]
+    private PassengerGenerator passengerGenerator;
+
+    [SerializeField]
     private PassengerViewFactory passengerViewFactory;
 
-    private IPassengerManager _passengerMgr;
-
-    private IPassengerGenerator _passengerGenerator;
+    private IPassengerManager _passengerMgr; 
 
     private PassengerEventManager _passengerEventManager;
 
@@ -58,10 +59,12 @@ public partial class GameController : MonoBehaviour
     private void Start() { 
 
         _passengerMgr = new PassengerManager();
-		
-        _passengerGenerator = new PassengerGenerator(this, map, _passengerMgr, passengerViewFactory);
+         
+        passengerGenerator.GeneratePassengerEvent += (newPassenger) => {
+            _passengerMgr.AddPassenger(newPassenger);
+        };
 
-        _passengerEventManager = new PassengerEventManager(_passengerGenerator);
+        _passengerEventManager = new PassengerEventManager(passengerGenerator);
 
         _passengerEventManager.StartWaitingEvent += scoreBoard.AddWaitingPassenger;
         _passengerEventManager.StopWaitingEvent += scoreBoard.RemoveWaitingPassenger;

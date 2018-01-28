@@ -27,8 +27,8 @@ public partial class GameController : MonoBehaviour
 			_passengerMgr.UpdateTimer ();
 		}
 
-		if (this._passengerGenerator != null) {
-			_passengerGenerator.UpdateTimer ();
+		if (this.passengerGenerator != null) {
+			passengerGenerator.UpdateTimer ();
 		}
 	}
 }
