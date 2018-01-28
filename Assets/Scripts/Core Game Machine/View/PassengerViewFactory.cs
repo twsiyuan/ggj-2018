@@ -8,7 +8,7 @@ public class PassengerViewFactory : MonoBehaviour
 	PassengerSettings settings;
 
     [SerializeField]
-    PassengerLabelSettings labelSettings;
+    PassengerIndexSettings labelSettings;
 
     public IPassengerView MakePassengerView(int dest) 
 	{

@@ -34,21 +34,20 @@ public class Passenger : IPassenger {
     private IPassengerView _view;
     public IPassengerView View { get { return _view; } }
 
-    private GameController _gameCtrl;
-
     public event Action<IPassenger> StartWaitingEvent;
     public event Action<IPassenger> StopWaitingEvent;
     public event Action<IPassenger> SuccessArriveEvent;
     public event Action<IPassenger> AngryExitEvent;
 
-    public Passenger(IStation start, IStation goal, IPassengerView view, GameController gameCtrl) {
+    public Passenger(IStation start, IStation goal, IPassengerView view) {
         _start = start;
         _goal = goal;
         _rage = 0;
         _mood = MoodStatus.Happy;
         _view = view;
-        _view.ChangeToFace1();
-        _gameCtrl = gameCtrl;
+
+        if(_view != null)
+            _view.ChangeToFace1();
     }
 
     public void AboardBus(IBus bus) {

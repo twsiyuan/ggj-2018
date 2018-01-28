@@ -12,7 +12,8 @@ public class UnitTest
         IStation s1 = new Station();
         IStation s2 = new Station();
         IStation s3 = new Station(); 
-        IPassenger p = new Passenger(s1, s2, null, null);
+        IPassenger p = new Passenger(s1, s2, null);
+        p.WaitingAtStation(s1);
         
         Assert.AreEqual(true, p.IsWaiting);
 
@@ -41,8 +42,9 @@ public class UnitTest
         IStation s2 = new Station();
         IStation s3 = new Station();
         IStation s4 = new Station();
-        IPassenger p = new Passenger(s1, s4, null, null);
-        
+        IPassenger p = new Passenger(s1, s4, null);
+        p.WaitingAtStation(s1);
+
         Assert.AreEqual(true, p.IsWaiting);
 
         int distance = 3;
@@ -71,10 +73,14 @@ public class UnitTest
         IStation s1 = new Station();
         IStation s2 = new Station();
         IStation s3 = new Station();
-        IPassenger p1 = new Passenger(s1, s3, null, null);
-        IPassenger p2 = new Passenger(s1, s3, null, null);
-        IPassenger p3 = new Passenger(s2, s3, null, null);
-        IPassenger p4 = new Passenger(s2, s3, null, null);
+        IPassenger p1 = new Passenger(s1, s3, null);
+        IPassenger p2 = new Passenger(s1, s3, null);
+        IPassenger p3 = new Passenger(s2, s3, null);
+        IPassenger p4 = new Passenger(s2, s3, null);
+        p1.WaitingAtStation(s1);
+        p2.WaitingAtStation(s1);
+        p3.WaitingAtStation(s2);
+        p4.WaitingAtStation(s2);
 
         Assert.AreEqual(true, p1.IsWaiting);
         Assert.AreEqual(true, p2.IsWaiting);
@@ -118,10 +124,14 @@ public class UnitTest
         IStation s2 = new Station();
         IStation s3 = new Station();
         IStation s4 = new Station();
-        IPassenger p1 = new Passenger(s1, s3, null, null);
-        IPassenger p2 = new Passenger(s1, s4, null, null);
-        IPassenger p3 = new Passenger(s2, s3, null, null);
-        IPassenger p4 = new Passenger(s2, s3, null, null);
+        IPassenger p1 = new Passenger(s1, s3, null);
+        IPassenger p2 = new Passenger(s1, s4, null);
+        IPassenger p3 = new Passenger(s2, s3, null);
+        IPassenger p4 = new Passenger(s2, s3, null);
+        p1.WaitingAtStation(s1);
+        p2.WaitingAtStation(s1);
+        p3.WaitingAtStation(s2);
+        p4.WaitingAtStation(s2);
 
         Assert.AreEqual(true, p1.IsWaiting);
         Assert.AreEqual(true, p2.IsWaiting);

@@ -51,7 +51,7 @@ public class PassengerGenerator : IPassengerGenerator
         int lableIdx = _gameCtrl.GetStationIndex(goal);
         IPassengerView passengerView = _passengerViewFactory.MakePassengerView(lableIdx);
 
-        IPassenger newPassenger = new Passenger(start, goal, passengerView, _gameCtrl);
+        IPassenger newPassenger = new Passenger(start, goal, passengerView);
         if (GeneratePassengerEvent != null) { 
             GeneratePassengerEvent.Invoke(newPassenger);
         }

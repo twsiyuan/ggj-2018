@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu]
-public class PassengerLabelSettings : ScriptableObject
+public class PassengerIndexSettings : ScriptableObject
 {
     [SerializeField]
     Sprite[] settings = new Sprite[0];
