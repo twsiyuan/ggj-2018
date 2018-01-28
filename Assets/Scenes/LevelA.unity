@@ -2674,6 +2674,7 @@ GameObject:
   - component: {fileID: 1730206744}
   - component: {fileID: 1730206747}
   - component: {fileID: 1730206746}
+  - component: {fileID: 1730206745}
   m_Layer: 0
   m_Name: LevelA
   m_TagString: Untagged
@@ -2764,6 +2765,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   busMax: 0
+--- !u!114 &1730206745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1730206738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c884eec00e8fcd41a97ba63d840ebbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allBus: {fileID: 11400000, guid: b68ef87c0d844204fa246a87dc30f306, type: 2}
 --- !u!82 &1730206746
 AudioSource:
   m_ObjectHideFlags: 0
