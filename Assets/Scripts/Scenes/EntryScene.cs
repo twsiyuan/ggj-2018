@@ -6,14 +6,17 @@ using UnityEngine.SceneManagement;
 public class EntryScene : MonoBehaviour {
 
 	[SerializeField]
-	string nextScene;
+	string menuScene;
+
+	[SerializeField]
+	string creditScene;
 
 	public void ToMenu(){
-		SceneManager.LoadScene (this.nextScene, LoadSceneMode.Single);
+		SceneManager.LoadScene (this.menuScene, LoadSceneMode.Single);
 	}
 
 	public void ToCredit(){
-		// TODO: To Credit
+		SceneManager.LoadScene (this.creditScene, LoadSceneMode.Single);
 	}
 
 
