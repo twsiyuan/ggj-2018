@@ -11,12 +11,19 @@ public class EntryScene : MonoBehaviour {
 	[SerializeField]
 	string creditScene;
 
+	[SerializeField]
+	string webURL;
+
 	public void ToMenu(){
 		SceneManager.LoadScene (this.menuScene, LoadSceneMode.Single);
 	}
 
 	public void ToCredit(){
 		SceneManager.LoadScene (this.creditScene, LoadSceneMode.Single);
+	}
+
+	public void OpenWeb(){
+		Application.OpenURL (this.webURL);
 	}
 
 
