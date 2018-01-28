@@ -18,6 +18,10 @@ public class PassengerGenerator : MonoBehaviour
     private float _waitIntervalMax;
     [SerializeField]
     private float _waitIntervalMin;
+    [SerializeField]
+    private float _maxWaitingPeople;
+
+    private IPassengerManager _passengerManager;
 
     public event Action<IPassenger> GeneratePassengerEvent; 
 
@@ -28,9 +32,13 @@ public class PassengerGenerator : MonoBehaviour
         GeneratePassengerEvent = null;
     }
 
+    public void InsertPassengerManager(IPassengerManager passengerManager) {
+        _passengerManager = passengerManager;
+    }
+
     public void UpdateTimer() {
         _timer -= Time.deltaTime;
-        if (_timer < 0) {
+        if (_timer < 0 && _passengerManager.WaitingPeopleNumber < _maxWaitingPeople ) {
             _generatePassenger();
             _resetTimer();
         }
@@ -58,7 +66,6 @@ public class PassengerGenerator : MonoBehaviour
     }
 
     private void _resetTimer() {
-        _timer = UnityEngine.Random.Range(_waitIntervalMin, _waitIntervalMax);
-        Debug.Log(_timer);
+        _timer = UnityEngine.Random.Range(_waitIntervalMin, _waitIntervalMax); 
     }
 }
