@@ -56,11 +56,12 @@ public partial class GameController : MonoBehaviour
 		}
 	}
 
-    private void Start() { 
+    void Start() { 
 
         _passengerMgr = new PassengerManager();
-         
-        passengerGenerator.GeneratePassengerEvent += (newPassenger) => {
+        passengerGenerator.InsertPassengerManager(_passengerMgr);
+
+        passengerGenerator.GeneratePassengerEvent += (newPassenger) => { 
             _passengerMgr.AddPassenger(newPassenger);
         };
 

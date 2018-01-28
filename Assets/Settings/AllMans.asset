@@ -16,3 +16,5 @@ MonoBehaviour:
     probabilityWeight: 1
   - prefab: {fileID: 1799836374937732, guid: f613a71f4b51d4c1cbcb3f7a49046acd, type: 2}
     probabilityWeight: 1
+  - prefab: {fileID: 1799836374937732, guid: 3b3bbc4cc925f4578ba232bc187a24a0, type: 2}
+    probabilityWeight: 1

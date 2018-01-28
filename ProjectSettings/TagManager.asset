@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Male
+  - Female
   layers:
   - Default
   - TransparentFX
@@ -43,6 +45,9 @@ TagManager:
     locked: 0
   - name: Bus
     uniqueID: 1750767127
+    locked: 0
+  - name: Passenger
+    uniqueID: 1598721611
     locked: 0
   - name: Line
     uniqueID: 1387843091
